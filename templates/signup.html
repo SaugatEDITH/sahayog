@@ -7,31 +7,43 @@
 
 
 
-    <form action="">
+    <form action="/signup/" method="post">
+        <center>
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+        </center> 
+            {% csrf_token %}
+            <label for="first name">
+                First Name : <input type="text" name="first_name" placeholder="First Name">
+            </label>
 
-        <label for="first name">
-            Name : <input type="text" placeholder="first name">
-        </label>
+            <label for="last name">
+                Last Name : <input type="text" name="last_name" placeholder="Last Name">
+            </label>
 
-        <label for="last name">
-            Name : <input type="text" placeholder="last name">
-        </label>
+            <label for="username">
+                username : <input type="text" name="username" placeholder="Username">
+            </label>
 
-        <label for="last name">
-            Email : <input type="text" placeholder="emil">
-        </label>
+            <label for="last name">
+                Email : <input type="text" name="email" placeholder="Email">
+            </label>
 
-        <label for="last confirmemail">
-            confirm email address : <input type="text" placeholder="re enter email address">
-        </label>
-        <label for="">
-            Passwords:
-            <input type="text" placeholder="passwords">
-        </label>
+            <label for="">
+                Password:
+                <input type="password" name="password" placeholder="password">
+            </label>
 
-        <button>
-            log in
-        </button>
+            <label for="last confirmemail">
+                confirm Password : <input type="password" name="confirm_password" placeholder="Confirm Password">
+            </label>
+
+            <button type="submit">
+                Sign Up
+            </button>
 
     </form>
 

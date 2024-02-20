@@ -1,9 +1,9 @@
 form {
-    width: 60%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 1vw;
-    margin: 0 auto;
+    margin: auto;
 }
 
 form label {
@@ -25,13 +25,13 @@ form a.forgot {
 
 
 form label input {
-    padding: 15px 20px;
-    border-radius: 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
     outline: none;
     border: none;
     width: 100%;
     letter-spacing: 1px;
-    font-size: 16px;
+    font-size: 14px;
     background: #D4E7C5;
     color: #222;
     border: 1px solid hsla(0, 0%, 60%, 0.185);

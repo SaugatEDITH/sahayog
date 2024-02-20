@@ -5,30 +5,30 @@
 
 {% block content %}
 <div id="main">
+    <form action="/login/" method="post">
+        <center>
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+        </center> 
+        {% csrf_token %}
 
-
-
-    <form action="">
-
-        <label for="last name">
-            Email : <input type="text" placeholder="emil">
+        <label for="username">
+            Email : <input type="text" placeholder="Username" name="loginusername">
         </label>
 
         <label for="">
-            Passwords:
-            <input type="text" placeholder="passwords">
+            Password:
+            <input type="password" placeholder="Password" name="loginpassword">
         </label>
         <a href="#" class="forgot">forgot password</a>
 
-        <button>
+        <button type="submit">
             log in
         </button>
-
     </form>
-
-
-
-
 
 </div>
 <div id="footer">

@@ -63,6 +63,17 @@
     background: hsl(98, 29%, 58%);
 }
 
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.warning {
+    color: orange;
+}
 
 @media (max-width:900px) {
     #ham {
