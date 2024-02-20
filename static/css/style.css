@@ -1,0 +1,49 @@
+@font-face {
+    font-family: saikripa;
+    src: url(/static/Fonts/NeueHaasDisplayMediu.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    color: #111;
+    font-family: saikripa;
+    scroll-behavior: smooth;
+}
+
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: #E1F0DA;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    background: lightgray;
+}
+
+#main {
+    position: relative;
+    padding: 10vw 7vw;
+    min-height: 80vh;
+    transition: .3s ease-in-out;
+}
+
+
+#main.blur {
+    filter: blur(2px);
+}
+
+@media (max-width:900px) {
+    #main {
+        padding: 20vw 2vw;
+    }
+}

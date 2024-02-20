@@ -1,0 +1,103 @@
+/* campaign */
+#campaign {
+    position: relative;
+    width: 100%;
+    margin-top: 5vw;
+}
+
+#each-person-container {
+    height: 100%;
+    width: 100%;
+    min-height: 20vh;
+    max-height: 90vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2vw;
+    padding: 2vw 7vw;
+    /* background: #D4E7C5; */
+    overflow: auto;
+}
+
+
+#each-person-container .each-person {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background: #BFD8AF;
+    height: 12vw;
+    align-items: center;
+    border-radius: 20px;
+    padding: 2vw;
+}
+
+#each-person-container .each-person div:nth-child(1) {
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#each-person-container .each-person div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: .2vw;
+    font-size: 1.2vw;
+    width: 40%;
+}
+
+#each-person-container .each-person div:nth-child(2) p {
+    font-size: 1vw;
+}
+
+#each-person-container .each-person ul {
+    display: flex;
+    flex-direction: column;
+    gap: .2vw;
+    text-transform: capitalize;
+    width: fit-content;
+    align-items: flex-end;
+}
+
+#each-person-container .each-person ul li {
+    width: 100%;
+    display: flex;
+    gap: 1vw;
+    font-size: 1.1vw;
+    justify-content: space-between;
+}
+
+@media (max-width:900px) {
+    #each-person-container .each-person {
+
+        min-height: 60vh;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5vh;
+    }
+
+    #each-person-container .each-person div:nth-child(1) {
+        height: 30vh;
+        width: 30vh;
+        padding: 1rem;
+    }
+
+    #each-person-container .each-person div:nth-child(2) {
+        font-size: 6vw;
+        width: 100%;
+        text-align: center;
+    }
+
+    #each-person-container .each-person div:nth-child(2) p {
+        font-size: 3vw;
+    }
+
+    #each-person-container .each-person ul li {
+        width: 100%;
+        display: flex;
+        gap: 1vw;
+        font-size: 3vw;
+        justify-content: space-between;
+    }
+}

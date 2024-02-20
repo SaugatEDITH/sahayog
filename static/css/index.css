@@ -1,0 +1,75 @@
+#hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 8vw);
+}
+
+#hero div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vw;
+    text-transform: capitalize;
+    width: 40%;
+    text-align: center;
+    align-items: center;
+}
+
+#hero div h1 {
+    font-size: 8vw;
+    text-align: justify;
+}
+
+#hero div input {
+    padding: 20px 20px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    width: 100%;
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: #D4E7C5;
+    color: #222;
+    border: 1px solid hsla(0, 0%, 60%, 0.185);
+}
+
+#hero div input::placeholder {
+    color: #999;
+}
+
+
+#hero div button {
+    padding: 10px;
+    border: none;
+    border: 1px solid #999;
+    width: fit-content;
+    width: 40%;
+    border-radius: 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 20px;
+    cursor: pointer;
+    background: #99BC85;
+    color: #fff;
+    transition: .3s linear;
+}
+
+#hero div button:hover {
+    background: hsl(98, 29%, 58%);
+}
+
+@media (max-width:900px) {
+    #hero div {
+        width: 100%;
+        gap: 5vh;
+    }
+
+    #hero div h1 {
+        font-size: 12vh;
+    }
+
+    #hero div button {
+        width: 80%;
+    }
+}

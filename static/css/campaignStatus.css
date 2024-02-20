@@ -1,0 +1,40 @@
+#campaign-status {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+#campaign-status ul {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    margin: 0 auto;
+    text-transform: capitalize;
+    font-weight: lighter;
+}
+
+#campaign-status ul li {
+    width: calc(100% / 4);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+}
+
+#campaign-status ul:nth-child(1) li {
+    border: none;
+}
+
+#campaign-status ul:nth-child(1) {
+    padding: 1vw 0;
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
+}
+
+@media (max-width:900px) {
+
+    #campaign-status ul {
+        width: 100%;
+    }
+}
