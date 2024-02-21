@@ -67,7 +67,7 @@ def handleSignup(request):
 def handleLogin(request):
     if request.method == 'POST':
         # Get the post parameters
-        loginusername = request.POST['loginemail']
+        loginusername = request.POST['loginusername']
         loginPassword = request.POST['loginpassword']
 
         user = authenticate(username=loginusername, password=loginPassword)
