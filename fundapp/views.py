@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 # for message display
 from django.contrib import messages
+# Models import
+from .models import AllFund
 # Payment Gateway API imports
 
 
@@ -15,7 +17,9 @@ def index(request):
    return render(request, 'index.html')
 
 def campaign(request):
-    return render(request, 'campaign.html')
+    allfund= AllFund.objects.all()
+    context = {"allfund": allfund}
+    return render(request, 'campaign.html', context)
 
 def about(request):
     return render(request, 'about.html')

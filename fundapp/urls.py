@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index,name='home'),
@@ -11,4 +13,4 @@ urlpatterns = [
     path('logout/', views.handleLogout,name='logout'),
     path('contact/', views.contact,name='contact'),
     # path('<str:hawa>/',views.hawa,name='404'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

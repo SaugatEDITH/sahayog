@@ -35,7 +35,8 @@
 #each-person-container .each-person div:nth-child(1) {
     height: 10vw;
     width: 10vw;
-    border-radius: 50%;
+    border: 1px solid black;
+    border-radius: 20px;
     overflow: hidden;
 }
 
