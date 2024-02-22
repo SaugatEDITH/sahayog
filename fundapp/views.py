@@ -4,6 +4,7 @@ from django.http import HttpResponse,HttpResponseNotFound
 # for login systems and user related systems
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # for message display
 from django.contrib import messages
 # Models import
@@ -98,19 +99,33 @@ def handleLogout(request):
 
 def contact(request):
     return render(request, 'contact.html')
-#new added urls functions
 
-#can't start a fund without being valid loged in user.
+
+@login_required(login_url='/login/')
 def startfund(request):
+    if request.method == 'POST':
+        image = request.FILES['image']
+        title = request.POST['title']
+        description = request.POST['description']
+        campaignType = request.POST['campaignType']
+        requiredFund = request.POST['requiredFund']
+        toSave = AllFund(user = request.user, image= image, title= title, description= description, campaignType= campaignType, required=requiredFund)
+        toSave.save()
     return render(request, 'startfund.html')
 
-def campaigndetails(request):
-    return render(request, 'campaigndetails.html')
+def campaigndetails(request, slug):
+    allfund = AllFund.objects.filter(slug=slug).first()
+    context ={"allfund": allfund} 
+    return render(request, 'campaigndetails.html', context)
 
+@login_required(login_url='/login/')
 def campaignstatus(request):
     return render(request, 'campaignStatus.html')
 
 def fundclaiming(request):
     return render(request, 'fundclaiming.html')
+
+
+
 # def hawa(request,hawa):
 #     return render(request, 'case_no_404.html')

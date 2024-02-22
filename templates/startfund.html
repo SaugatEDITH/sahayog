@@ -7,37 +7,38 @@
 {% block content %}
 <div id="main">
 
-    <form action="">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <h2 class="campaign-start">Campaign Start from here</h2>
         <label for="">
             campaign name:
-            <input type="text" placeholder="">
+            <input type="text" placeholder="" name="title">
         </label>
         <label for="">
             campaign description:
-            <input type="text" placeholder="">
+            <input type="text" placeholder="" name="description">
         </label>
         <label for="">
             campaign type:
-            <select name="" id="">
-                <option value="">Charity Campaign</option>
-                <option value="">Personal Campaign</option>
-                <option value="">Natural Disaster</option>
-                <option value="">Other</option>
+            <select name="campaignType" id="">
+                <option value="charityCampaign">Charity Campaign</option>
+                <option value="personalCampaign">Personal Campaign</option>
+                <option value="naturalDisaster">Natural Disaster</option>
+                <option value="others">Others</option>
             </select>
         </label>
 
         <div class="photo-div">
             <h3>Campaign Photo:</h3>
             <span class="photo-wrap">Choose a Image</span>
-            <input type="file" class="input">
+            <input type="file" class="input" name="image">
         </div>
 
         <label for="">
             required total fund:
-            <input type="text" placeholder="">
+            <input type="text" placeholder="" name="requiredFund">
         </label>
-        <input type="submit" class="startfund">
+        <input type="submit" value="Proceed Campaign" class="startfund">
     </form>
 </div>
 

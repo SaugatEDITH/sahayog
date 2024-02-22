@@ -5,10 +5,10 @@
 
 
 {% endblock stylesheet %}
- 
+
 {% block content %}
- <!-- ham -->
- <div id="main">
+<!-- ham -->
+<div id="main">
 
 
     <!-- pop form -->
@@ -16,6 +16,9 @@
         <i class="ri-close-circle-line"></i>
         <label for="">
             Number: <input type="text" placeholder="esewa number">
+        </label>
+        <label for="">
+            Address: <input type="text" placeholder="Address">
         </label>
         <input type="submit">
 
@@ -25,6 +28,9 @@
         <i class="ri-close-circle-line"></i>
         <label for="">
             Number: <input type="text" placeholder="khalti number">
+        </label>
+        <label for="">
+            Address: <input type="text" placeholder="Address">
         </label>
         <input type="submit">
     </form>
@@ -37,6 +43,17 @@
 
         <label for="">
             Account Number: <input type="text" placeholder="bank account number">
+        </label>
+        <label for="">
+            Receiving Name: <input type="text" placeholder="Receiving Person Name">
+        </label>
+
+        <label for="">
+            Address: <input type="text" placeholder="Address">
+        </label>
+
+        <label for="">
+            Phone Number: <input type="text" placeholder="Phone Number">
         </label>
         <input type="submit">
 
@@ -73,60 +90,60 @@
     </div>
 
 
-    
-    
+
+
 </div>
 <div id="footer">
     {% endblock content %}
-    
-    
 
-{% block script %}
-const esewaButton = document.querySelector(".esewa");
-const khaltiButton = document.querySelector(".khalti");
-const bankButton = document.querySelector(".bank");
-const esewa = document.querySelector("#esewa");
-const khalti = document.querySelector("#khalti");
-const bank = document.querySelector("#bank");
-const cancel = document.querySelectorAll(".ri-close-circle-line")
 
-esewaButton.addEventListener("click", () => {
+
+    {% block script %}
+    const esewaButton = document.querySelector(".esewa");
+    const khaltiButton = document.querySelector(".khalti");
+    const bankButton = document.querySelector(".bank");
+    const esewa = document.querySelector("#esewa");
+    const khalti = document.querySelector("#khalti");
+    const bank = document.querySelector("#bank");
+    const cancel = document.querySelectorAll(".ri-close-circle-line")
+
+    esewaButton.addEventListener("click", () => {
     esewa.classList.add("open");
     khalti.classList.remove("open");
     bank.classList.remove("open");
 
-});
+    });
 
-khaltiButton.addEventListener("click", () => {
+    khaltiButton.addEventListener("click", () => {
     esewa.classList.remove("open");
     khalti.classList.add("open");
     bank.classList.remove("open");
 
 
-});
+    });
 
-bankButton.addEventListener("click", () => {
+    bankButton.addEventListener("click", () => {
     esewa.classList.remove("open");
     khalti.classList.remove("open");
     bank.classList.add("open");
 
 
-});
+    });
 
-cancel.forEach((e) => {
+    cancel.forEach((e) => {
     e.addEventListener("click", () => {
-        khalti.classList.remove("open");
-        bank.classList.remove("open");
-        esewa.classList.remove("open");
+    khalti.classList.remove("open");
+    bank.classList.remove("open");
+    esewa.classList.remove("open");
 
 
     })
-})
+    })
 
 
-{% endblock script %}
+    {% endblock script %}
 
-   
-</body>
 
-</html>
+    </body>
+
+    </html>

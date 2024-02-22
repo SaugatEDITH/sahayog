@@ -9,7 +9,7 @@
         <div id="each-person-container">
             <!-- from here the redirect will go one to the campaign status -->
             {% for item in allfund %}
-            <a href="/campaign/campaigndetails">
+            <a href="/campaign/{{item.slug}}">
                 <div class="each-person">
                     <div class="image">
                         <img src="{{item.image.url}}" alt="">
