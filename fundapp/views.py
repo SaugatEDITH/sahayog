@@ -172,7 +172,10 @@ def deleteCampaign(request,post_id):
         return redirect('/')
     except AllFund.DoesNotExist:
         return HttpResponseNotFound("Post not found.")
-    
+#editCampaign
+def editCampaign(request):
+    return render(request, 'editCampaign.html')
+
 # def hawa(request,hawa):
 #     return render(request, 'case_no_404.html')
 

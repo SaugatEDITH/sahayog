@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/startfund.css">
+{% endblock stylesheet %}
+
+{% block content %}
+<div id="main">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="campaign-start">Edit Campaign from here</h2>
+        <label for="">
+            campaign name:
+            <input type="text" placeholder="" name="title">
+        </label>
+        <label for="">
+            campaign description:
+            <input type="text" placeholder="" name="description">
+        </label>
+        <label for="">
+            campaign type:
+            <select name="campaignType" id="">
+                <option value="charityCampaign">Charity Campaign</option>
+                <option value="personalCampaign">Personal Campaign</option>
+                <option value="naturalDisaster">Natural Disaster</option>
+                <option value="others">Others</option>
+            </select>
+        </label>
+
+        <div class="photo-div">
+            <h3>Campaign Photo:</h3>
+            <span class="photo-wrap">Choose a Image</span>
+            <input type="file" class="input" name="image">
+        </div>
+
+        <label for="">
+            required total fund:
+            <input type="text" placeholder="" name="requiredFund">
+        </label>
+        <input type="submit" value="Proceed Campaign" class="startfund">
+    </form>
+</div>
+
+<div id="footer">
+
+</div>
+{% endblock content %}
+
+
+
+
+  
+{% block script %}
+document.querySelector(".photo-wrap").addEventListener("click", function () {
+    document.querySelector(".input").click();
+    // alert("Hello")
+})
+{% endblock script %}
