@@ -20,7 +20,8 @@
                 for help
             </h1>
             <input type="text" placeholder="search">
-            <button>start a fund</button>
+           <button id="startfund">start a fund</button>
+         
         </div>
     </div>
 
@@ -34,3 +35,9 @@
 </div>
 
 {% endblock content %}
+{% block script %}
+document.getElementById("startfund").onclick = function(){
+    location.href="/startfund"
+}
+{% endblock script %}
+

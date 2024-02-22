@@ -2,35 +2,83 @@
     display: flex;
     flex-direction: column;
     gap: 1vw;
+    overflow: auto;
+    padding: 2rem 0;
 }
 
-#campaign-status ul {
-    display: flex;
-    width: 60%;
-    justify-content: space-between;
-    margin: 0 auto;
+table {
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+th,
+td,
+tr {
+    padding: 1rem;
+    border: 1px solid lightgray;
+    text-align: center;
     text-transform: capitalize;
-    font-weight: lighter;
+    text-wrap: nowrap;
 }
 
-#campaign-status ul li {
-    width: calc(100% / 4);
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+td i {
+    cursor: pointer;
+}
+
+th {
     border: 1px solid gray;
 }
-
-#campaign-status ul:nth-child(1) li {
-    border: none;
-}
-
-#campaign-status ul:nth-child(1) {
-    padding: 1vw 0;
-    border-bottom: 1px solid lightgray;
-    font-weight: bold;
-}
+ /* CSS for claim and edit button */
+ .button-3 {
+    appearance: none;
+    background-color: #2ea44f;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  
+  .button-3:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .button-3:hover {
+    background-color: #2c974b;
+  }
+  
+  .button-3:focus {
+    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+    outline: none;
+  }
+  
+  .button-3:disabled {
+    background-color: #94d3a2;
+    border-color: rgba(27, 31, 35, .1);
+    color: rgba(255, 255, 255, .8);
+    cursor: default;
+  }
+  
+  .button-3:active {
+    background-color: #298e46;
+    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  }
 
 @media (max-width:900px) {
 

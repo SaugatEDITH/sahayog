@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/fundclaiming.css">
+
+
+{% endblock stylesheet %}
+ 
+{% block content %}
+ <!-- ham -->
+ <div id="main">
+
+
+    <!-- pop form -->
+    <form action="" id="esewa">
+        <i class="ri-close-circle-line"></i>
+        <label for="">
+            Number: <input type="text" placeholder="esewa number">
+        </label>
+        <input type="submit">
+
+    </form>
+
+    <form action="" id="khalti">
+        <i class="ri-close-circle-line"></i>
+        <label for="">
+            Number: <input type="text" placeholder="khalti number">
+        </label>
+        <input type="submit">
+    </form>
+
+    <form action="" id="bank">
+        <i class="ri-close-circle-line"></i>
+        <label for="">
+            Account Name: <input type="text" placeholder="bank account name">
+        </label>
+
+        <label for="">
+            Account Number: <input type="text" placeholder="bank account number">
+        </label>
+        <input type="submit">
+
+    </form>
+
+
+
+    <div class="fund-claiming">
+
+        <div class="esewa">
+            <div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Esewa_logo.webp" alt="">
+            </div>
+            <h3>request claiming using esewa</h3>
+
+
+        </div>
+
+        <div class="khalti">
+            <div>
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Khalti_Digital_Wallet_Logo.png.jpg"
+                    alt="">
+            </div>
+            <h3>request claiming using khalti</h3>
+        </div>
+
+        <div class="bank">
+            <div>
+                <img src="https://i.pinimg.com/originals/37/9a/5e/379a5e4fd4d416640ef6afaa4afdca14.png" alt="">
+            </div>
+            <h3>request claiming using bank</h3>
+        </div>
+    </div>
+
+
+    
+    
+</div>
+<div id="footer">
+    {% endblock content %}
+    
+    
+
+{% block script %}
+const esewaButton = document.querySelector(".esewa");
+const khaltiButton = document.querySelector(".khalti");
+const bankButton = document.querySelector(".bank");
+const esewa = document.querySelector("#esewa");
+const khalti = document.querySelector("#khalti");
+const bank = document.querySelector("#bank");
+const cancel = document.querySelectorAll(".ri-close-circle-line")
+
+esewaButton.addEventListener("click", () => {
+    esewa.classList.add("open");
+    khalti.classList.remove("open");
+    bank.classList.remove("open");
+
+});
+
+khaltiButton.addEventListener("click", () => {
+    esewa.classList.remove("open");
+    khalti.classList.add("open");
+    bank.classList.remove("open");
+
+
+});
+
+bankButton.addEventListener("click", () => {
+    esewa.classList.remove("open");
+    khalti.classList.remove("open");
+    bank.classList.add("open");
+
+
+});
+
+cancel.forEach((e) => {
+    e.addEventListener("click", () => {
+        khalti.classList.remove("open");
+        bank.classList.remove("open");
+        esewa.classList.remove("open");
+
+
+    })
+})
+
+
+{% endblock script %}
+
+   
+</body>
+
+</html>

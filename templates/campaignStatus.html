@@ -1,47 +1,51 @@
 {% extends "base.html" %}
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/css/campaignStatus.css">
+
 {% endblock stylesheet %}
 {% block content %}
-<div id="main">
+    <div id="main">
 
 
-    <div id="campaign-status">
-        <ul>
-            <li>date</li>
-            <li>name</li>
-            <li>requirement</li>
-            <li>edit</li>
-            <li>
-                <i class="ri-delete-bin-line"></i>
-            </li>
-        </ul>
+        <div id="campaign-status">
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Name of Campaign</th>
+                    <th>Required Fund</th>
+                    <th>Collected Fund</th>
+                    <th>Claim Fund</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>Campaign Name</td>
+                    <td>2222555</td>
+                    <td>34002</td>
+                    <td><!-- HTML !-->
+                        <button class="button-3" name="claim" role="button">Claim</button>
+                        
+                       </td>
+                    <td> <button class="button-3" name="edit" role="button">edit</button>
+                </td>
+                    <td>
+                        <i class="ri-delete-bin-line"></i>
+                    </td>
+                </tr>
+            </table>
 
 
+        </div>
 
-        <!-- fetched code -->
-        <ul>
-            <li>202902</li>
-            <li>walle</li>
-            <li>skills</li>
-            <li>possible</li>
-            <li>
-                <i class="ri-delete-bin-line"></i>
-            </li>
-        </ul>
+
 
 
 
     </div>
+    <div id="footer">
 
-
-
-
-
-</div>
-<div id="footer">
-
-</div>
+    </div>
 
 
 {% endblock content %}

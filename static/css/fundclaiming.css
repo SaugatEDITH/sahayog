@@ -1,0 +1,130 @@
+form {
+    width: 50%;
+    position: absolute;
+    z-index: 9;
+    background: #dadada;
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* From https://css.glass */
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    display: none;
+}
+
+form i {
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    color: red;
+    cursor: pointer;
+
+    font-size: 2rem;
+}
+
+form.open {
+    display: flex;
+}
+
+form label {
+    display: flex;
+    gap: .2rem;
+    font-size: 20px;
+    letter-spacing: 1px;
+    flex-direction: column;
+}
+
+form label input {
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 100%;
+    letter-spacing: 2px;
+    font-size: 16px;
+    background: #D4E7C5;
+    color: #222;
+    border: 1px solid hsla(0, 0%, 60%, 0.185);
+}
+
+input {
+    padding: 5px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    background: #99BC85;
+    color: #fff;
+    transition: .3s linear;
+    border: 1px solid #999;
+    text-transform: capitalize;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+div.fund-claiming {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    margin-top: 5rem;
+    justify-content: center;
+}
+
+div.fund-claiming div div:nth-child(1) {
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+    border-radius: 10px;
+    background: purple;
+    width: calc(100vw / 4);
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+
+div.fund-claiming div h3:nth-child(2) {
+    margin-top: 10px;
+    display: flex;
+    letter-spacing: 1px;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+img {
+    border-radius: 10px;
+    object-fit: cover;
+    background: none;
+    aspect-ratio: 16 / 7;
+    border-radius: 10px;
+}
+
+@media (max-width:900px) {
+
+    div.fund-claiming {
+        flex-direction: column;
+    }
+
+    div.fund-claiming div div:nth-child(1) {
+        height: 50%;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    form {
+        width: 90%;
+    }
+}

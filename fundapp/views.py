@@ -98,6 +98,19 @@ def handleLogout(request):
 
 def contact(request):
     return render(request, 'contact.html')
+#new added urls functions
 
+#can't start a fund without being valid loged in user.
+def startfund(request):
+    return render(request, 'startfund.html')
+
+def campaigndetails(request):
+    return render(request, 'campaigndetails.html')
+
+def campaignstatus(request):
+    return render(request, 'campaignStatus.html')
+
+def fundclaiming(request):
+    return render(request, 'fundclaiming.html')
 # def hawa(request,hawa):
 #     return render(request, 'case_no_404.html')
