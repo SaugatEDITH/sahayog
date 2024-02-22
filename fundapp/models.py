@@ -62,7 +62,8 @@ class BankClaim(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bank_claim_user')
     bankName = models.CharField(max_length=180)
     accountNumber = models.CharField(max_length = 150)
-    ReceivingName = models.CharField(max_length = 100)
+    receivingName = models.CharField(max_length = 100)
+    accountName = models.CharField(max_length =100)
     receivingAddress = models.CharField(max_length = 200)
     phoneNumber = models.CharField(max_length=15)
     

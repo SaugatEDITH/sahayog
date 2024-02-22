@@ -16,5 +16,7 @@ urlpatterns = [
     path('campaign/<str:slug>/', views.campaigndetails,name='campaindetails'),
     path('campaignstatus/', views.campaignstatus,name='campainstatus'),
     path('campaignstatus/fundclaiming/', views.fundclaiming,name='claim-fund'),
+    
+    path('campaignstatus/deleteCampaign/<int:post_id>', views.deleteCampaign, name='deleteCampaign'),
     # path('<str:hawa>/',views.hawa,name='404'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

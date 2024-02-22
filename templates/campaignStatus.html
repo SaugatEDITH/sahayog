@@ -9,6 +9,7 @@
 
         <div id="campaign-status">
             <table>
+                {% for items in myCampaigns %}
                 <tr>
                     <th>Date</th>
                     <th>Name of Campaign</th>
@@ -19,10 +20,10 @@
                     <th>Delete</th>
                 </tr>
                 <tr>
-                    <td>2023</td>
-                    <td>Campaign Name</td>
-                    <td>2222555</td>
-                    <td>34002</td>
+                    <td>{{items.timeStamp}}</td>
+                    <td>{{items.title}}</td>
+                    <td>{{items.required|floatformat:2}}</td>
+                    <td>{{items.have|floatformat:2}}</td>
                     <td><!-- HTML !-->
                         <button id="claim"class="button-3" name="claim" role="button">Claim</button>
                         
@@ -30,18 +31,18 @@
                     <td> <button id="edit" class="button-3" name="edit" role="button">Edit</button>
                 </td>
                     <td>
-                        <i class="ri-delete-bin-line"></i>
+                        <form action="/campaignstatus/deleteCampaign/{{items.sno}}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="" value="{{items.sno}}">
+                            <button id="delete" class="button-3" type="submit" name="edit" role="button">Delete</button>
+                        </form>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
 
 
         </div>
-
-
-
-
-
     </div>
     <div id="footer">
 

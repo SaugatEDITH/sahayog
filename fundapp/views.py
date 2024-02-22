@@ -8,8 +8,15 @@ from django.contrib.auth.decorators import login_required
 # for message display
 from django.contrib import messages
 # Models import
-from .models import AllFund
+from .models import AllFund, EsewaClaim, KhaltiClaim, BankClaim
 # Payment Gateway API imports
+# esewa
+#! first need to make donate part frontend
+import uuid
+import requests as req
+import hmac
+import hashlib
+import base64
 
 
 
@@ -120,12 +127,53 @@ def campaigndetails(request, slug):
 
 @login_required(login_url='/login/')
 def campaignstatus(request):
-    return render(request, 'campaignStatus.html')
+    myCampaigns = AllFund.objects.filter(user=request.user)
+    context = {"myCampaigns": myCampaigns}
+    return render(request, 'campaignStatus.html', context)
 
 def fundclaiming(request):
+    if request.method == 'POST':
+        form_type = request.POST.get('form_type')
+        if form_type == 'esewa':
+            esewa_number = request.POST.get('esewanumber')
+            esewa_address = request.POST.get('esewaaddress')
+            esewaToSave = EsewaClaim(user = request.user ,phoneNumber = esewa_number, receivingAddress = esewa_address)
+            esewaToSave.save()
+        elif form_type == 'khalti':
+            khalti_number = request.POST.get('khaltinumber')
+            khalti_address = request.POST.get('khaltiaddress')
+            khaltiToSave = KhaltiClaim(user = request.user ,phoneNumber = khalti_number, receivingAddress = khalti_address)
+            khaltiToSave.save()
+
+        elif form_type == 'bank':
+            bankname = request.POST.get('bankname')
+            accountname = request.POST.get('accountname')
+            accountnumber = request.POST.get('accountnumber')
+            receivingperson = request.POST.get('receivingperson')
+            receivingaddress = request.POST.get('receivingaddress')
+            receivingphone = request.POST.get('receivingphone')
+            bankToSave = BankClaim(user = request.user ,bankName = bankname ,accountNumber=accountnumber,receivingName=receivingperson,accountName = accountname  ,receivingAddress=receivingaddress ,phoneNumber=receivingphone )
+            bankToSave.save()            
     return render(request, 'fundclaiming.html')
 
 
+# For Payment Gateways
+def foresewa(request):
+    pass
+# Delete Systems
+# Own Campaign Delete System
 
+@login_required(login_url='/login/')
+def deleteCampaign(request,post_id):
+    try:
+        post = AllFund.objects.get(sno=post_id)
+        post.delete()
+        messages.success(request, "Deleted Campaign Successfully")
+        return redirect('/')
+    except AllFund.DoesNotExist:
+        return HttpResponseNotFound("Post not found.")
+    
 # def hawa(request,hawa):
 #     return render(request, 'case_no_404.html')
+
+

@@ -12,51 +12,59 @@
 
 
     <!-- pop form -->
-    <form action="" id="esewa">
+    <form action="" id="esewa" method="post">
+        {% csrf_token %}
         <i class="ri-close-circle-line"></i>
+        <input type="hidden" name="form_type" value="esewa">
         <label for="">
-            Number: <input type="text" placeholder="esewa number">
+            Number: <input type="text" name="esewanumber" placeholder="esewa number">
         </label>
         <label for="">
-            Address: <input type="text" placeholder="Address">
+            Address: <input type="text" name="esewaaddress" placeholder="Address">
         </label>
         <input type="submit">
 
     </form>
 
-    <form action="" id="khalti">
+    <form action="" id="khalti" method="post">
+        {% csrf_token %}
         <i class="ri-close-circle-line"></i>
+        <input type="hidden" name="form_type" value="khalti">
         <label for="">
-            Number: <input type="text" placeholder="khalti number">
+            Number: <input type="text" name="khaltinumber" placeholder="khalti number">
         </label>
         <label for="">
-            Address: <input type="text" placeholder="Address">
+            Address: <input type="text" name="khaltiaddress" placeholder="Address">
         </label>
         <input type="submit">
     </form>
 
-    <form action="" id="bank">
+    <form action="" id="bank" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="bank">
         <i class="ri-close-circle-line"></i>
         <label for="">
-            Account Name: <input type="text" placeholder="bank account name">
+            Bank Name: <input type="text" name="bankname" placeholder="Bank name">
+        </label>
+        <label for="">
+            Account Name: <input type="text" name="accountname" placeholder="bank account name">
         </label>
 
         <label for="">
-            Account Number: <input type="text" placeholder="bank account number">
+            Account Number: <input type="text" name="accountnumber" placeholder="bank account number">
         </label>
         <label for="">
-            Receiving Name: <input type="text" placeholder="Receiving Person Name">
-        </label>
-
-        <label for="">
-            Address: <input type="text" placeholder="Address">
+            Receiving Person Name: <input type="text" name="receivingperson" placeholder="Receiving Person Name">
         </label>
 
         <label for="">
-            Phone Number: <input type="text" placeholder="Phone Number">
+            Address: <input type="text" name="receivingaddress" placeholder="Address">
+        </label>
+
+        <label for="">
+            Phone Number: <input type="text" name="receivingphone" placeholder="Phone Number">
         </label>
         <input type="submit">
-
     </form>
 
 
