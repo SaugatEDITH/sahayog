@@ -24,10 +24,10 @@
                     <td>2222555</td>
                     <td>34002</td>
                     <td><!-- HTML !-->
-                        <button class="button-3" name="claim" role="button">Claim</button>
+                        <button id="claim"class="button-3" name="claim" role="button">Claim</button>
                         
                        </td>
-                    <td> <button class="button-3" name="edit" role="button">edit</button>
+                    <td> <button id="edit" class="button-3" name="edit" role="button">edit</button>
                 </td>
                     <td>
                         <i class="ri-delete-bin-line"></i>
@@ -49,4 +49,11 @@
 
 
 {% endblock content %}
-    
+{% block script %}
+document.getElementById("claim").onclick = function() {
+    location.href="/campaignstatus/fundclaiming/"
+}
+document.getElementById("edit").onclick = function() {
+    location.href="/startfund"
+}
+{% endblock script %}

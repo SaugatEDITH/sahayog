@@ -15,6 +15,6 @@ urlpatterns = [
     path('startfund/', views.startfund,name='startfund'),
     path('campaign/campaigndetails/', views.campaigndetails,name='campaindetails'),
     path('campaignstatus/', views.campaignstatus,name='campainstatus'),
-    path('fundclaiming/', views.fundclaiming,name='claim-fund'),
+    path('campaignstatus/fundclaiming/', views.fundclaiming,name='claim-fund'),
     # path('<str:hawa>/',views.hawa,name='404'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
