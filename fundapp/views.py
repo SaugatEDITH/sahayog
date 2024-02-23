@@ -4,6 +4,7 @@ from django.http import HttpResponse,HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from decimal import Decimal
 # for login systems and user related systems
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -187,7 +188,7 @@ def esewasahayog(request, slug):
     allfund = AllFund.objects.filter(slug=slug).first()
     if request.method == "POST":
         amtt = request.POST["amount"]
-        res = int(amtt) # converting the amount into integer value
+        res = Decimal(amtt) # converting the amount into decimal value
             
         def genSha256(key, message):
             key = key.encode('utf-8')
@@ -207,12 +208,16 @@ def esewasahayog(request, slug):
         # Create a Transaction object and save it to the database
         transaction = Transaction(
             user=request.user,
-            medium='Esewa',  # You may adjust this value based on your requirement
+            medium='Esewa', 
             amount=res,
-            amountReceiver=allfund.user,  # Assuming 'user' is the field in AllFund pointing to the receiver
+            amountReceiver=allfund.user,
             campaignTitle=allfund,
         )
         transaction.save()
+        # Update the 'have' field in the AllFund model
+        allfund.have += res
+        allfund.save()
+
         context = {
                 "res":res,
                 'total_amount': total_amount,
