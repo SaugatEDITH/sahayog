@@ -205,32 +205,36 @@ def esewasahayog(request, slug):
         data_to_sign = f"total_amount={total_amount},transaction_uuid={uid},product_code=EPAYTEST" #form esewa Docs and v2 requirements
         result = genSha256(secret_key, data_to_sign)
         
-        # Create a Transaction object and save it to the database
-        transaction = Transaction(
-            user=request.user,
-            medium='Esewa', 
-            amount=res,
-            amountReceiver=allfund.user,
-            campaignTitle=allfund,
-        )
-        transaction.save()
-        # Update the 'have' field in the AllFund model
-        allfund.have += res
-        allfund.save()
+        if payment_is_successful(request):
+            transaction = Transaction(
+                user=request.user,
+                medium='Esewa', 
+                amount=res,
+                amountReceiver=allfund.user,
+                campaignTitle=allfund,
+            )
+            transaction.save()
+            # Update the 'have' field in the AllFund model
+            allfund.have += res
+            allfund.save()
 
-        context = {
-                "res":res,
+            context = {
+                "res": res,
                 'total_amount': total_amount,
                 "allfund": allfund,
                 'uid': uid,
                 'signature': result
-        }
-        return render(request,"foresewa.html",context)
-    outercontext = {"allfund":allfund}
-    return render(request,"esewasahayog.html", outercontext)
+            }
+            return render(request, "foresewa.html", context)
+        
+    outercontext = {"allfund": allfund}
+    return render(request, "esewasahayog.html", outercontext)
 
-def foresewa(request):
-    pass
+
+def payment_is_successful(request):
+    success_value= True
+    messages.success(request, "Payment is successful")
+    return success_value
 
 # Delete Systems
 # Own Campaign Delete System

@@ -23,7 +23,9 @@ urlpatterns = [
     path('campaignstatus/updateCampaign/<int:post_id>', views.updateCampaign, name='updateCampaign'),
     
     # for esewa donation
-    path("campaign/<str:slug>/esewasahayog/", views.esewasahayog, name="esewasahayog")
+    path("campaign/<str:slug>/esewasahayog/", views.esewasahayog, name="esewasahayog"),
+    # for esewa success url
+    path("esewa-payment-success/", views.payment_is_successful, name="payment_is_successful_esewa")
 
 
     # path('<str:hawa>/',views.hawa,name='404'),
