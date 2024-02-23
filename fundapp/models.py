@@ -72,7 +72,7 @@ class BankClaim(models.Model):
     
 class Transaction(models.Model):
     sno = models.AutoField(primary_key=True)
-    amountDonator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_user_donator')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_user_donator')
     medium = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=19, decimal_places=3)
     amountReceiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_user_receiver')

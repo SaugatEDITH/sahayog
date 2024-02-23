@@ -21,6 +21,9 @@ urlpatterns = [
     path('campaignstatus/deleteCampaign/<int:post_id>', views.deleteCampaign, name='deleteCampaign'),
     # for updating campaigns
     path('campaignstatus/updateCampaign/<int:post_id>', views.updateCampaign, name='updateCampaign'),
+    
+    # for esewa donation
+    path("campaign/<str:slug>/esewasahayog/", views.esewasahayog, name="esewasahayog")
 
 
     # path('<str:hawa>/',views.hawa,name='404'),

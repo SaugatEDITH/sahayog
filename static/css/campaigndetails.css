@@ -22,7 +22,7 @@ form div:nth-child(2) div:nth-child(1) {
 }
 
 img {
-    object-fit: contain;
+    object-fit: cover;
     background: none;
     height: 100%;
     width: 100%;

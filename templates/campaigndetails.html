@@ -2,41 +2,48 @@
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/css/campaigndetails.css">
 {% endblock stylesheet %}
-{% block content %} 
-    <!-- ham -->
-    <div id="main">
-        <form class="campaign-details">
-            <h1>{{allfund.title}}</h1>
-            <div>
-                <div class="img-wrap">
-                    <img src="{{allfund.image.url}}"
-                        alt="">
-                </div>
-                <div>
-                    <h4>required amount: <span>Rs {{allfund.required|floatformat:2}}</span> </h4>
-                    <h4>collected amount: <span>Rs {{allfund.have|floatformat:2}}</span></h4>
-                    <h4>stared by : <span>{{allfund.user}}</span></h4>
-                </div>
+{% block content %}
+<!-- ham -->
+<div id="main">
+    <form class="campaign-details">
+        <h1>{{allfund.title}}</h1>
+        <div>
+            <div class="img-wrap">
+                <img src="{{allfund.image.url}}" alt="">
             </div>
             <div>
-                created at: <span> {{allfund.timeStamp}}</span>
+                <h4>required amount: <span>Rs {{allfund.required|floatformat:2}}</span> </h4>
+                <h4>collected amount: <span>Rs {{allfund.have|floatformat:2}}</span></h4>
+                <h4>stared by : <span>{{allfund.user}}</span></h4>
             </div>
-            <p>
-                {{allfund.description}}
-            </p>
+        </div>
+        <div>
+            created at: <span> {{allfund.timeStamp}}</span>
+        </div>
+        <p>
+            {{allfund.description}}
+        </p>
+        <div>
+            <h2>donation method</h2>
             <div>
-                <h2>donation method</h2>
-                <div>
+                <a href="/campaign/{{allfund.slug}}/esewasahayog/">
                     <img src="https://esewa.com.np/common/images/esewa_logo.png" alt="">
+                </a>
 
-                    <img src="https://seeklogo.com/images/K/khalti-logo-F0B049E67E-seeklogo.com.png"
+                <a href="/">
+                    <img src="https://seeklogo.com/images/K/khalti-logo-F0B049E67E-seeklogo.com.png" alt="">
+                </a>
+
+                <a href="/">
+                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-paypal-54-675727.png?f=webp&w=512"
                         alt="">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-paypal-54-675727.png?f=webp&w=512" alt="">
-                </div>
-            </div>
-        </form>
-    </div>
-    <div id="footer">
+                </a>
 
-    </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="footer">
+
+</div>
 {% endblock content %}

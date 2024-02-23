@@ -12,7 +12,7 @@ from django.core.files.storage import default_storage
 # for message display
 from django.contrib import messages
 # Models import
-from .models import AllFund, EsewaClaim, KhaltiClaim, BankClaim
+from .models import AllFund, EsewaClaim, KhaltiClaim, BankClaim, Transaction
 # Payment Gateway API imports
 # esewa
 #! first need to make donate part frontend
@@ -129,6 +129,9 @@ def startfund(request):
 
 def campaigndetails(request, slug):
     allfund = AllFund.objects.filter(slug=slug).first()
+    # if request.method == 'POST':
+    #     amtt = request.POST["amount"]
+    #     res = int(amtt)
     context ={"allfund": allfund} 
     return render(request, 'campaigndetails.html', context)
 
@@ -179,6 +182,48 @@ def fundclaiming(request,post_id):
 
 
 # For Payment Gateways
+# for esewa
+def esewasahayog(request, slug):
+    allfund = AllFund.objects.filter(slug=slug).first()
+    if request.method == "POST":
+        amtt = request.POST["amount"]
+        res = int(amtt) # converting the amount into integer value
+            
+        def genSha256(key, message):
+            key = key.encode('utf-8')
+            message = message.encode('utf-8')
+            hmac_sha256 = hmac.new(key, message, hashlib.sha256)
+            digest = hmac_sha256.digest()
+            # Convert the digest to a Base64-encoded string
+            signature = base64.b64encode(digest).decode('utf-8')
+            return signature
+        
+        total_amount = res
+        secret_key = "8gBm/:&EnhH.1/q"  #form esewa Docs
+        uid= uuid.uuid4()
+        data_to_sign = f"total_amount={total_amount},transaction_uuid={uid},product_code=EPAYTEST" #form esewa Docs and v2 requirements
+        result = genSha256(secret_key, data_to_sign)
+        
+        # Create a Transaction object and save it to the database
+        transaction = Transaction(
+            user=request.user,
+            medium='Esewa',  # You may adjust this value based on your requirement
+            amount=res,
+            amountReceiver=allfund.user,  # Assuming 'user' is the field in AllFund pointing to the receiver
+            campaignTitle=allfund,
+        )
+        transaction.save()
+        context = {
+                "res":res,
+                'total_amount': total_amount,
+                "allfund": allfund,
+                'uid': uid,
+                'signature': result
+        }
+        return render(request,"foresewa.html",context)
+    outercontext = {"allfund":allfund}
+    return render(request,"esewasahayog.html", outercontext)
+
 def foresewa(request):
     pass
 
