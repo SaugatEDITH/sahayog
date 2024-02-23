@@ -10,7 +10,6 @@
 <!-- ham -->
 <div id="main">
 
-
     <!-- pop form -->
     <form action="" id="esewa" method="post">
         {% csrf_token %}
@@ -69,8 +68,13 @@
 
 
 
+    <div class="details">
+        <center>
+            <h3>For Campaign : {{campaign.title}}</h3>
+            <h3>You are claiming Rs. {{campaign.have|floatformat:2}}</h3>
+        </center>
+    </div>
     <div class="fund-claiming">
-
         <div class="esewa">
             <div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Esewa_logo.webp" alt="">

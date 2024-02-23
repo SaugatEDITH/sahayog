@@ -5,11 +5,8 @@
 {% endblock stylesheet %}
 {% block content %}
     <div id="main">
-
-
         <div id="campaign-status">
             <table>
-                {% for items in myCampaigns %}
                 <tr>
                     <th>Date</th>
                     <th>Name of Campaign</th>
@@ -19,16 +16,26 @@
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
+                {% for items in myCampaigns %}
                 <tr>
                     <td>{{items.timeStamp}}</td>
                     <td>{{items.title}}</td>
                     <td>{{items.required|floatformat:2}}</td>
                     <td>{{items.have|floatformat:2}}</td>
                     <td><!-- HTML !-->
-                        <button id="claim"class="button-3" name="claim" role="button">Claim</button>
-                        
+                        <!-- <button id="claim"class="button-3" name="claim" role="button">Claim</button> -->
+                        <form action="/campaignstatus/fundclaiming/{{items.sno}}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="" value="{{items.sno}}">
+                            <button id="claim" class="button-3" type="submit" name="claim" role="button">Claim</button>
+                        </form>
                        </td>
-                    <td> <button id="edit" class="button-3" name="edit" role="button">Edit</button>
+                    <td> 
+                        <form action="/campaignstatus/editCampaign/{{items.sno}}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="" value="{{items.sno}}">
+                            <button id="update" class="button-3" type="submit" name="update" role="button">Edit</button>
+                        </form>
                 </td>
                     <td>
                         <form action="/campaignstatus/deleteCampaign/{{items.sno}}" method="post">
@@ -51,9 +58,9 @@
 
 {% endblock content %}
 {% block script %}
-document.getElementById("claim").onclick = function() {
+<!-- document.getElementById("claim").onclick = function() {
     location.href="/campaignstatus/fundclaiming/"
-}
+} -->
 document.getElementById("edit").onclick = function() {
     location.href="/campaignstatus/editCampaign"
 }

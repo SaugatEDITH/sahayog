@@ -15,8 +15,13 @@ urlpatterns = [
     path('startfund/', views.startfund,name='startfund'),
     path('campaign/<str:slug>/', views.campaigndetails,name='campaindetails'),
     path('campaignstatus/', views.campaignstatus,name='campainstatus'),
-    path('campaignstatus/fundclaiming/', views.fundclaiming,name='claim-fund'),
-    path('campaignstatus/editCampaign/', views.editCampaign,name='editCampaign'),
+    path('campaignstatus/fundclaiming/<int:post_id>', views.fundclaiming,name='claim-fund'),
+    path('campaignstatus/editCampaign/<int:post_id>', views.editCampaign,name='editCampaign'),
+    # for deleting campaigns
     path('campaignstatus/deleteCampaign/<int:post_id>', views.deleteCampaign, name='deleteCampaign'),
+    # for updating campaigns
+    path('campaignstatus/updateCampaign/<int:post_id>', views.updateCampaign, name='updateCampaign'),
+
+
     # path('<str:hawa>/',views.hawa,name='404'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

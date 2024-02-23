@@ -1,10 +1,14 @@
 # Normal Djanngo imports
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,HttpResponseNotFound
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # for login systems and user related systems
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
 # for message display
 from django.contrib import messages
 # Models import
@@ -118,6 +122,9 @@ def startfund(request):
         requiredFund = request.POST['requiredFund']
         toSave = AllFund(user = request.user, image= image, title= title, description= description, campaignType= campaignType, required=requiredFund)
         toSave.save()
+        message = "Sucessfully Started the Campaign"
+        messages.success(request, message)
+        return redirect('/campaign')
     return render(request, 'startfund.html')
 
 def campaigndetails(request, slug):
@@ -131,7 +138,9 @@ def campaignstatus(request):
     context = {"myCampaigns": myCampaigns}
     return render(request, 'campaignStatus.html', context)
 
-def fundclaiming(request):
+def fundclaiming(request,post_id):
+    campaign = get_object_or_404(AllFund, sno=post_id, user=request.user)
+    outercontext = {"campaign": campaign}
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
         if form_type == 'esewa':
@@ -139,11 +148,19 @@ def fundclaiming(request):
             esewa_address = request.POST.get('esewaaddress')
             esewaToSave = EsewaClaim(user = request.user ,phoneNumber = esewa_number, receivingAddress = esewa_address)
             esewaToSave.save()
+            # To delete the campaign after saving details
+            campaign.delete()
+            messages.success(request, 'We will send you the amount, your campaign is removed sucessfully.')
+            return redirect('/')
         elif form_type == 'khalti':
             khalti_number = request.POST.get('khaltinumber')
             khalti_address = request.POST.get('khaltiaddress')
             khaltiToSave = KhaltiClaim(user = request.user ,phoneNumber = khalti_number, receivingAddress = khalti_address)
             khaltiToSave.save()
+            # To delete the campaign after saving details
+            campaign.delete()
+            messages.success(request, 'We will send you the amount, your campaign is removed sucessfully.')
+            return redirect('/')
 
         elif form_type == 'bank':
             bankname = request.POST.get('bankname')
@@ -153,16 +170,20 @@ def fundclaiming(request):
             receivingaddress = request.POST.get('receivingaddress')
             receivingphone = request.POST.get('receivingphone')
             bankToSave = BankClaim(user = request.user ,bankName = bankname ,accountNumber=accountnumber,receivingName=receivingperson,accountName = accountname  ,receivingAddress=receivingaddress ,phoneNumber=receivingphone )
-            bankToSave.save()            
-    return render(request, 'fundclaiming.html')
+            bankToSave.save() 
+            # To delete the campaign after saving details
+            campaign.delete()
+            messages.success(request, 'We will send you the amount, your campaign is removed sucessfully for now.')
+            return redirect('/')           
+    return render(request, 'fundclaiming.html', outercontext)
 
 
 # For Payment Gateways
 def foresewa(request):
     pass
+
 # Delete Systems
 # Own Campaign Delete System
-
 @login_required(login_url='/login/')
 def deleteCampaign(request,post_id):
     try:
@@ -172,10 +193,41 @@ def deleteCampaign(request,post_id):
         return redirect('/')
     except AllFund.DoesNotExist:
         return HttpResponseNotFound("Post not found.")
+    
 #editCampaign
-def editCampaign(request):
-    return render(request, 'editCampaign.html')
+def editCampaign(request, post_id):
+    campaign = get_object_or_404(AllFund, sno=post_id, user=request.user)
+    context = {"campaign": campaign}
+    return render(request, 'editCampaign.html', context)
 
+# Update Systems
+@login_required(login_url='/login/')
+def updateCampaign(request, post_id):
+    campaign = get_object_or_404(AllFund, sno=post_id, user=request.user)
+
+    if request.method == 'POST':
+        updatetitle = request.POST.get('updatetitle', '').strip()
+        updatedescription = request.POST.get('updatedescription', '').strip()
+        updateType = request.POST.get('updateType', '').strip()
+        updaterequired = request.POST.get('updaterequired', '').strip()
+        updateimage = request.FILES.get('updateimage')
+
+        if updatetitle:
+            campaign.title = updatetitle
+        if updatedescription:
+            campaign.description = updatedescription
+        if updateType:
+            campaign.campaignType = updateType
+        if updaterequired:
+            campaign.required = updaterequired
+        if updateimage:
+            campaign.image = updateimage
+        campaign.save()
+        messages.success(request, "Updated Campaign Successfully")
+        return redirect('/')
+    context = {'campaign': campaign}
+    return render(request, 'editCampaign.html', context)
+    
 # def hawa(request,hawa):
 #     return render(request, 'case_no_404.html')
 

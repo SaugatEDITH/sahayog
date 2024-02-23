@@ -5,39 +5,39 @@
 
 {% block content %}
 <div id="main">
+    <form action="/campaignstatus/updateCampaign/{{ campaign.sno }}" method="post" enctype="multipart/form-data">
 
-    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="campaign-start">Edit Campaign from here</h2>
         <label for="">
             campaign name:
-            <input type="text" placeholder="" name="title">
+            <input type="text" placeholder="" name="updatetitle" value="{{ campaign.title }}">
         </label>
         <label for="">
             campaign description:
-            <input type="text" placeholder="" name="description">
+            <input type="text" placeholder="" name="updatedescription" value="{{ campaign.description }}">
         </label>
         <label for="">
             campaign type:
-            <select name="campaignType" id="">
-                <option value="charityCampaign">Charity Campaign</option>
-                <option value="personalCampaign">Personal Campaign</option>
-                <option value="naturalDisaster">Natural Disaster</option>
-                <option value="others">Others</option>
+            <select name="updateType" id="">
+                <option value="updatecharityCampaign" {% if campaign.type == 'charityCampaign' %}selected{% endif %}>Charity Campaign</option>
+                <option value="updatepersonalCampaign" {% if campaign.type == 'personalCampaign' %}selected{% endif %}>Personal Campaign</option>
+                <option value="updatenaturalDisaster" {% if campaign.type == 'naturalDisaster' %}selected{% endif %}>Natural Disaster</option>
+                <option value="updateothers" {% if campaign.type == 'others' %}selected{% endif %}>Others</option>
             </select>
         </label>
 
         <div class="photo-div">
             <h3>Campaign Photo:</h3>
             <span class="photo-wrap">Choose a Image</span>
-            <input type="file" class="input" name="image">
+            <input type="file" class="input" name="updateimage">
         </div>
 
         <label for="">
             required total fund:
-            <input type="text" placeholder="" name="requiredFund">
+            <input type="text" placeholder="" name="updaterequired" value="{{ campaign.required|floatformat:2 }}">
         </label>
-        <input type="submit" value="Proceed Campaign" class="startfund">
+        <input type="submit" value="Edit Campaign" class="startfund">
     </form>
 </div>
 
@@ -46,10 +46,6 @@
 </div>
 {% endblock content %}
 
-
-
-
-  
 {% block script %}
 document.querySelector(".photo-wrap").addEventListener("click", function () {
     document.querySelector(".input").click();
