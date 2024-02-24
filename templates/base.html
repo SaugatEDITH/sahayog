@@ -41,12 +41,15 @@
         </ul>
         <div>
             {% if user.is_authenticated %}
-            <button class="login-signup-button" id="signup-button">
-                <a href="{% url 'logout' %}">Log Out</a>
-            </button>
+            <a href="{% url 'logout' %}">
+                <button class="login-signup-button" id="signup-button">
+                    Log Out
+                </button>
+            </a>
             <button class="login-signup-button" id="signup-button">
                 <a href="/campaignstatus">Campaign Status</a>
             </button>
+            <h4>username: <span class="generalspan">{{request.user}}</span></h4>
             {% else %}
             <button class="login-signup-button" id="login-button">
                 <a href="/login">Log In</a>
@@ -63,9 +66,9 @@
     {% endblock content %}
     <script src="/static/js/navbar.js"></script>
     <script>
-    {% block script %}
-    
-    {% endblock script %}
+        {% block script %}
+
+        {% endblock script %}
     </script>
 </body>
 

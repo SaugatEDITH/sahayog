@@ -5,6 +5,14 @@
 {% endblock stylesheet %}
 {% block content %}
     <div id="main">
+        {% if not myCampaigns %}
+        <center>
+            <h2 style="margin-bottom: 1rem;">You Have Not Started a Campaign Yet!</h2>
+            <a href="{% url 'startfund' %}">
+                <button class="button-3">Start a Campaign</button>
+            </a>  
+        </center>
+        {% else %}
         <div id="campaign-status">
             <table>
                 <tr>
@@ -50,6 +58,7 @@
 
 
         </div>
+        {% endif %}
     </div>
     <div id="footer">
 

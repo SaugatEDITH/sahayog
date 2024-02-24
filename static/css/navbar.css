@@ -74,6 +74,9 @@
 .warning {
     color: orange;
 }
+.generalspan{
+    color: blue;
+}
 
 @media (max-width:900px) {
     #ham {
