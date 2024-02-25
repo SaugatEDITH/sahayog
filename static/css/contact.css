@@ -1,0 +1,214 @@
+#contact-div {
+    display: flex;
+    height: 80vh;
+    background: #D4E7C5;
+    border-radius: 10px;
+}
+
+#contact-div i {
+    color: #555;
+    font-size: 20px;
+}
+
+#contact-div>div:nth-child(1) {
+    width: 25%;
+    position: relative;
+}
+
+
+#contact-div>div:nth-child(1)>h1:nth-child(1) {
+    position: absolute;
+    transform: rotate(90deg);
+    top: 8rem;
+    left: 10%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    letter-spacing: 1px;
+    color: #444;
+}
+
+#contact-div>div:nth-child(1)>div:nth-child(2) {
+    position: absolute;
+    bottom: 1rem;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-transform: capitalize;
+    display: flex;
+    gap: 1rem;
+}
+
+#contact-div>div:nth-child(1)>div:nth-child(2) i {
+    font-size: 30px;
+    color: #555;
+    cursor: pointer;
+}
+
+#contact-div>div:nth-child(2) {
+
+    width: 80%;
+    background-color: hsl(94, 41%, 80%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+
+#contact-div>div:nth-child(2) h1 {
+    text-transform: capitalize;
+    width: 100%;
+    text-align: center;
+}
+
+#contact-div>div:nth-child(2) h3 {
+    text-transform: capitalize;
+    width: 100%;
+    text-align: center;
+}
+
+#contact-div>div:nth-child(2)>div:nth-child(3) {
+    display: flex;
+    gap: 5rem;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    /* text-transform: capitalize; */
+}
+
+#contact-div>div:nth-child(2)>div:nth-child(3)>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+
+#contact-div form {
+    display: flex;
+    background: #D4E7C5;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    gap: 1vw;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+#contact-div form label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 1vw;
+    text-transform: capitalize;
+}
+
+#contact-div form label span {
+    display: none;
+}
+
+#contact-div form label input {
+    padding: 15px 20px;
+    outline: none;
+    border: none;
+    letter-spacing: 1px;
+    background: transparent;
+    color: #222;
+    border-bottom: 1px solid black;
+}
+
+#contact-div form label input::placeholder {
+    opacity: 1;
+    color: #000;
+}
+
+#contact-div form label input:focus::placeholder {
+    opacity: 1;
+    color: transparent;
+}
+
+#contact-div form label textarea {
+    padding: 15px 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: initial;
+
+}
+
+#contact-div form label textarea::placeholder {
+    color: #000;
+    font-size: small;
+}
+
+#contact-div form label textarea:focus::placeholder {
+    color: transparent;
+}
+
+#contact-div form label textarea:focus span.span-name {
+    display: block;
+}
+
+
+#contact-div form button {
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: #99BC85;
+    color: white;
+    transition: .3s linear;
+    border: 1px solid #999;
+    text-transform: capitalize;
+
+}
+
+#contact-div form input[type="submit"] {
+    padding: 5px 50px;
+    border-radius: 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: #99BC85;
+    color: white;
+    transition: .3s linear;
+    border: 1px solid #999;
+    width: fit-content;
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.socialmedia {
+    display: none;
+}
+
+@media (max-width:900px) {
+    #contact-div>div:nth-child(1) {
+        display: none;
+    }
+
+    #contact-div>div:nth-child(2) {
+
+        width: 100%;
+        height: 100%;
+        /* min-height: 70vh; */
+    }
+
+    #contact-div {
+        flex-direction: column;
+    }
+
+    .socialmedia {
+        display: flex;
+        margin-top: 50px;
+        gap: 1rem;
+    }
+}
