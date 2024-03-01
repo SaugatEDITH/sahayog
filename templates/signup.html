@@ -17,28 +17,28 @@
         </center> 
             {% csrf_token %}
             <label for="first name">
-                First Name : <input type="text" name="first_name" placeholder="First Name">
+                First Name : <input type="text" name="first_name" placeholder="First Name" required>
             </label>
 
             <label for="last name">
-                Last Name : <input type="text" name="last_name" placeholder="Last Name">
+                Last Name : <input type="text" name="last_name" placeholder="Last Name" required>
             </label>
 
             <label for="username">
-                username : <input type="text" name="username" placeholder="Username">
+                username : <input type="text" name="username" placeholder="Username"required>
             </label>
 
-            <label for="last name">
-                Email : <input type="text" name="email" placeholder="Email">
+            <label for="email">
+                Email : <input type="text" name="email" placeholder="Email" required>
             </label>
 
-            <label for="">
+            <label for="password">
                 Password:
-                <input type="password" name="password" placeholder="password">
+                <input type="password" name="password" placeholder="password" required>
             </label>
 
             <label for="last confirmemail">
-                confirm Password : <input type="password" name="confirm_password" placeholder="Confirm Password">
+                confirm Password : <input type="password" name="confirm_password" placeholder="Confirm Password" required>
             </label>
 
             <button type="submit">
@@ -59,3 +59,93 @@
 
 
 {% endblock content %}
+{% block script %}
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function(event) {
+        const firstNameInput = document.querySelector("input[name='first_name']");
+        const lastNameInput = document.querySelector("input[name='last_name']");
+        const usernameInput = document.querySelector("input[name='username']");
+        const emailInput = document.querySelector("input[name='email']");
+        const passwordInput = document.querySelector("input[name='password']");
+        const confirmPasswordInput = document.querySelector("input[name='confirm_password']");
+
+        const firstNamePattern = /^[a-zA-Z]+$/;
+        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        let isValid = true;
+
+        if (!firstNamePattern.test(firstNameInput.value)) {
+            isValid = false;
+            setError(firstNameInput, "** First name can only contain letters (lowercase or uppercase).");
+        } else {
+            clearError(firstNameInput);
+        }
+
+        if (!firstNamePattern.test(lastNameInput.value)) {
+            isValid = false;
+            setError(lastNameInput, "** Last name can only contain letters (lowercase or uppercase).");
+        } else {
+            clearError(lastNameInput);
+        }
+
+        if (!firstNamePattern.test(usernameInput.value)) {
+            isValid = false;
+            setError(usernameInput, "** Username can only contain letters (lowercase or uppercase).");
+        } else {
+            clearError(usernameInput);
+        }
+
+        if (!emailPattern.test(emailInput.value)) {
+            isValid = false;
+            setError(emailInput, "** Invalid email address.");
+        } else {
+            clearError(emailInput);
+        }
+
+        if (!passwordPattern.test(passwordInput.value)) {
+            isValid = false;
+            setError(passwordInput, "** Password must contain at least 8 characters, including at least one letter, one number, and one special character.");
+        } else {
+            clearError(passwordInput);
+        }
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            isValid = false;
+            setError(confirmPasswordInput, "** Passwords do not match.");
+        } else {
+            clearError(confirmPasswordInput);
+        }
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+
+    function setError(inputField, errorMessage) {
+        inputField.style.borderColor = "red";
+        let errorSpan = inputField.nextElementSibling; // Check if error span already exists
+        if (!errorSpan || errorSpan.className !== "error-message") {
+            // If error span doesn't exist or is not the correct type, create it
+            errorSpan = document.createElement("span");
+            errorSpan.className = "error-message";
+            errorSpan.style.fontSize = "0.8em"; // Set font size
+            inputField.parentNode.insertBefore(errorSpan, inputField.nextSibling); // Insert after the input field
+        }
+        errorSpan.innerHTML = "<strong>**</strong> " + errorMessage;
+        errorSpan.style.color = "red";
+    }
+
+    function clearError(inputField) {
+        inputField.style.borderColor = "";
+        let errorSpan = inputField.nextElementSibling; // Check if error span exists
+        if (errorSpan && errorSpan.className === "error-message") {
+            errorSpan.parentNode.removeChild(errorSpan); // Remove the error span
+        }
+    }
+});
+
+
+{% endblock script %}

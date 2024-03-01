@@ -41,7 +41,7 @@
                 </div>
                 <div>
                     <i class="ri-mail-line"></i>
-                    email@gmail.com
+                    <a href="mailto:sahayog@gmail.com">Sahayog@gmail.com</a>
                 </div>
 
             </div>
@@ -81,9 +81,65 @@
         </div>
     </div>
 
-
-
 </div>
 <div id="footer"></div>
 {% endblock content %}
-   
+   {% block script %}.
+   document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function(event) {
+        const nameInput = document.querySelector("input[name='name']");
+        const emailInput = document.querySelector("input[name='email']");
+
+        // Regular expression patterns for name and email validation
+        const namePattern = /^[a-zA-Z\s]+$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        let isValid = true;
+
+        // Validate name
+        if (!namePattern.test(nameInput.value.trim())) {
+            isValid = false;
+            setError(nameInput, "Name can only contain letters and spaces.");
+        } else {
+            clearError(nameInput);
+        }
+
+        // Validate email
+        if (!emailPattern.test(emailInput.value.trim())) {
+            isValid = false;
+            setError(emailInput, "Invalid email format.");
+        } else {
+            clearError(emailInput);
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+    function setError(inputField, errorMessage) {
+        inputField.style.borderColor = "red";
+        let errorSpan = inputField.nextElementSibling;
+        if (!errorSpan || errorSpan.className !== "error-message") {
+            errorSpan = document.createElement("span");
+            errorSpan.className = "error-message";
+            errorSpan.style.fontSize = "0.8em";
+            inputField.parentNode.insertBefore(errorSpan, inputField.nextSibling);
+        }
+        errorSpan.innerHTML = "<strong>**</strong> " + errorMessage;
+        errorSpan.style.color = "red";
+    }
+
+    function clearError(inputField) {
+        inputField.style.borderColor = "";
+        let errorSpan = inputField.nextElementSibling;
+        if (errorSpan && errorSpan.className === "error-message") {
+            errorSpan.parentNode.removeChild(errorSpan);
+        }
+    }
+});
+
+   {% endblock script %}

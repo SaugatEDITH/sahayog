@@ -12,11 +12,11 @@
         <h2 class="campaign-start">Campaign Start from here</h2>
         <label for="">
             campaign name:
-            <input type="text" placeholder="" name="title">
+            <input type="text" placeholder="" name="title" required>
         </label>
         <label for="">
             campaign description:
-            <input type="text" placeholder="" name="description">
+            <input type="text" placeholder="" name="description" required>
         </label>
         <label for="">
             campaign type:
@@ -31,12 +31,12 @@
         <div class="photo-div">
             <h3>Campaign Photo:</h3>
             <span class="photo-wrap">Choose a Image</span>
-            <input type="file" class="input" name="image">
+            <input type="file" class="input" name="image" required>
         </div>
 
         <label for="">
             required total fund:
-            <input type="text" placeholder="" name="requiredFund">
+            <input type="text" placeholder="" name="requiredFund" required>
         </label>
         <input type="submit" value="Proceed Campaign" class="startfund">
     </form>
@@ -56,4 +56,85 @@ document.querySelector(".photo-wrap").addEventListener("click", function () {
     document.querySelector(".input").click();
     // alert("Hello")
 })
+
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function(event) {
+        const titleInput = document.querySelector("input[name='title']");
+        const descriptionInput = document.querySelector("input[name='description']");
+        const imageInput = document.querySelector("input[name='image']");
+        const requiredFundInput = document.querySelector("input[name='requiredFund']");
+
+        const titlePattern = /^[a-zA-Z\s]+$/; // Updated pattern to allow spaces
+        const allowedImageTypes = ["image/jpeg", "image/jpg"];
+        const maxDescriptionLength = 300;
+
+        let isValid = true;
+
+        // Validate campaign name
+        if (!titlePattern.test(titleInput.value)) {
+            isValid = false;
+            setError(titleInput, "** Campaign name can only contain letters and spaces.");
+        } else {
+            clearError(titleInput);
+        }
+
+        // Validate description length
+        if (descriptionInput.value.length > maxDescriptionLength) {
+            isValid = false;
+            setError(descriptionInput, "** Description must be maximum 300 characters long.");
+        } else {
+            clearError(descriptionInput);
+        }
+
+        // Validate image file type
+        if (imageInput.files.length > 0) {
+            const fileType = imageInput.files[0].type;
+            if (!allowedImageTypes.includes(fileType)) {
+                isValid = false;
+                setError(imageInput, "** Image must be in JPEG or JPG format.");
+            } else {
+                clearError(imageInput);
+            }
+        }
+
+        // Validate required total fund
+        const requiredFund = parseFloat(requiredFundInput.value);
+        if (isNaN(requiredFund) || requiredFund <= 0) {
+            isValid = false;
+            setError(requiredFundInput, "** Required total fund must be a number greater than 0.");
+        } else {
+            clearError(requiredFundInput);
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+    function setError(inputField, errorMessage) {
+        inputField.style.borderColor = "red";
+        let errorSpan = inputField.nextElementSibling;
+        if (!errorSpan || errorSpan.className !== "error-message") {
+            errorSpan = document.createElement("span");
+            errorSpan.className = "error-message";
+            errorSpan.style.fontSize = "0.8em";
+            inputField.parentNode.insertBefore(errorSpan, inputField.nextSibling);
+        }
+        errorSpan.innerHTML = "<strong>**</strong> " + errorMessage;
+        errorSpan.style.color = "red";
+    }
+
+    function clearError(inputField) {
+        inputField.style.borderColor = "";
+        let errorSpan = inputField.nextElementSibling;
+        if (errorSpan && errorSpan.className === "error-message") {
+            errorSpan.parentNode.removeChild(errorSpan);
+        }
+    }
+});
+
+
 {% endblock script %}

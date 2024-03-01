@@ -152,6 +152,171 @@
     })
     })
 
+    document.addEventListener("DOMContentLoaded", function() {
+        const esewaButton = document.querySelector(".esewa");
+        const khaltiButton = document.querySelector(".khalti");
+        const bankButton = document.querySelector(".bank");
+        const esewaForm = document.querySelector("#esewa");
+        const khaltiForm = document.querySelector("#khalti");
+        const bankForm = document.querySelector("#bank");
+        const cancelButtons = document.querySelectorAll(".ri-close-circle-line");
+    
+        esewaButton.addEventListener("click", () => {
+            esewaForm.classList.add("open");
+            khaltiForm.classList.remove("open");
+            bankForm.classList.remove("open");
+        });
+    
+        khaltiButton.addEventListener("click", () => {
+            esewaForm.classList.remove("open");
+            khaltiForm.classList.add("open");
+            bankForm.classList.remove("open");
+        });
+    
+        bankButton.addEventListener("click", () => {
+            esewaForm.classList.remove("open");
+            khaltiForm.classList.remove("open");
+            bankForm.classList.add("open");
+        });
+    
+        cancelButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                esewaForm.classList.remove("open");
+                khaltiForm.classList.remove("open");
+                bankForm.classList.remove("open");
+            });
+        });
+    
+        esewaForm.addEventListener("submit", function(event) {
+            const esewaNumberInput = esewaForm.querySelector("input[name='esewanumber']");
+            const esewaAddressInput = esewaForm.querySelector("input[name='esewaaddress']");
+    
+            // Validate Esewa phone number
+            const esewaNumber = esewaNumberInput.value.trim();
+            if (!validateNepaliPhoneNumber(esewaNumber)) {
+                setError(esewaNumberInput, "Esewa phone number should start with 98 or 97 and have a length of 10 digits.");
+                event.preventDefault();
+            } else {
+                clearError(esewaNumberInput);
+            }
+    
+            // Validate Esewa address
+            if (esewaAddressInput.value.trim() === "") {
+                setError(esewaAddressInput, "Address is required.");
+                event.preventDefault();
+            } else {
+                clearError(esewaAddressInput);
+            }
+        });
+    
+        khaltiForm.addEventListener("submit", function(event) {
+            const khaltiNumberInput = khaltiForm.querySelector("input[name='khaltinumber']");
+            const khaltiAddressInput = khaltiForm.querySelector("input[name='khaltiaddress']");
+    
+            // Validate Khalti phone number
+            const khaltiNumber = khaltiNumberInput.value.trim();
+            if (!validateNepaliPhoneNumber(khaltiNumber)) {
+                setError(khaltiNumberInput, "Khalti phone number should start with 98 or 97 and have a length of 10 digits.");
+                event.preventDefault();
+            } else {
+                clearError(khaltiNumberInput);
+            }
+    
+            // Validate Khalti address
+            if (khaltiAddressInput.value.trim() === "") {
+                setError(khaltiAddressInput, "Address is required.");
+                event.preventDefault();
+            } else {
+                clearError(khaltiAddressInput);
+            }
+        });
+    {% comment %} validation code {% endcomment %}
+        bankForm.addEventListener("submit", function(event) {
+            const bankNameInput = bankForm.querySelector("input[name='bankname']");
+            const accountNameInput = bankForm.querySelector("input[name='accountname']");
+            const accountNumberInput = bankForm.querySelector("input[name='accountnumber']");
+            const receivingPersonInput = bankForm.querySelector("input[name='receivingperson']");
+            const receivingAddressInput = bankForm.querySelector("input[name='receivingaddress']");
+            const receivingPhoneInput = bankForm.querySelector("input[name='receivingphone']");
+    
+            // Validate Bank Name
+            if (bankNameInput.value.trim() === "") {
+                setError(bankNameInput, "Bank name is required.");
+                event.preventDefault();
+            } else {
+                clearError(bankNameInput);
+            }
+    
+            // Validate Account Name
+            if (accountNameInput.value.trim() === "") {
+                setError(accountNameInput, "Account name is required.");
+                event.preventDefault();
+            } else {
+                clearError(accountNameInput);
+            }
+    
+            // Validate Account Number
+            if (accountNumberInput.value.trim() === "") {
+                setError(accountNumberInput, "Account number is required.");
+                event.preventDefault();
+            } else {
+                clearError(accountNumberInput);
+            }
+    
+            // Validate Receiving Person Name
+            if (receivingPersonInput.value.trim() === "") {
+                setError(receivingPersonInput, "Receiving person name is required.");
+                event.preventDefault();
+            } else {
+                clearError(receivingPersonInput);
+            }
+    
+            // Validate Receiving Address
+            if (receivingAddressInput.value.trim() === "") {
+                setError(receivingAddressInput, "Receiving address is required.");
+                event.preventDefault();
+            } else {
+                clearError(receivingAddressInput);
+            }
+    
+            // Validate Receiving Phone Number
+            const receivingPhone = receivingPhoneInput.value.trim();
+            if (!validateNepaliPhoneNumber(receivingPhone)) {
+                setError(receivingPhoneInput, "Not a valid phone number.");
+                event.preventDefault();
+            } else {
+                clearError(receivingPhoneInput);
+            }
+        });
+    
+        function setError(inputField, errorMessage) {
+            inputField.style.borderColor = "red";
+            let errorSpan = inputField.nextElementSibling;
+            if (!errorSpan || errorSpan.className !== "error-message") {
+                errorSpan = document.createElement("span");
+                errorSpan.className = "error-message";
+                errorSpan.style.fontSize = "0.8em";
+                inputField.parentNode.insertBefore(errorSpan, inputField.nextSibling);
+            }
+            errorSpan.innerHTML = "<strong>**</strong> " + errorMessage;
+            errorSpan.style.color = "red";
+        }
+    
+        function clearError(inputField) {
+            inputField.style.borderColor = "";
+            let errorSpan = inputField.nextElementSibling;
+            if (errorSpan && errorSpan.className === "error-message") {
+                errorSpan.parentNode.removeChild(errorSpan);
+            }
+        }
+    
+        function validateNepaliPhoneNumber(number) {
+            const nepaliPhoneNumberPattern = /^(98|97)\d{8}$/;
+            return nepaliPhoneNumberPattern.test(number);
+        }
+    });
+    
+
 
     {% endblock script %}
 
