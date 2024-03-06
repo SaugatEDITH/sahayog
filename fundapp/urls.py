@@ -12,6 +12,7 @@ urlpatterns = [
     path('signup/', views.handleSignup,name='signup'),
     path('logout/', views.handleLogout,name='logout'),
     path('contact/', views.contact,name='contact'),
+    path('search/', views.search_campaigns, name='search_campaigns'),
     path('startfund/', views.startfund,name='startfund'),
     path('campaign/<str:slug>/', views.campaigndetails,name='campaindetails'),
     path('campaignstatus/', views.campaignstatus,name='campainstatus'),

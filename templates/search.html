@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/campaign.css">
+{% endblock stylesheet %}
+
+{% block content %}
+<div id="main">
+    <div id="campaign">
+        <div id="each-person-container">
+            <center>
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </center>
+            {% if results %}
+                {% for item in results %}
+                    <a href="/campaign/{{ item.slug }}">
+                        <div class="each-person">
+                            <div class="image">
+                                <img src="{{ item.image.url }}" alt="">
+                            </div>
+                            <div class="info">
+                                <a href="">{{ item.title }}</a>
+                                <p>{{ item.description }}</p>
+                            </div>
+                            <ul>
+                                <li>required : <span>Rs: {{ item.required|floatformat:2 }}</span></li>
+                                <li>have : <span>Rs: {{ item.have|floatformat:2 }}</span></li>
+                            </ul>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No matching results found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

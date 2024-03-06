@@ -30,10 +30,16 @@ def index(request):
    return render(request, 'index.html')
 
 def campaign(request):
-    allfund= AllFund.objects.all()
+    allfund= AllFund.objects.all()[::-1]
     context = {"allfund": allfund}
     return render(request, 'campaign.html', context)
-
+def search_campaigns(request):
+    query = request.GET.get('q')
+    if query:
+        results =AllFund.objects.filter(title__icontains=query)
+    else:
+        results = []
+    return render(request, 'search.html', {'results': results})
 def about(request):
     return render(request, 'about.html')
 

@@ -19,7 +19,11 @@
                 <br>
                 for help
             </h1>
-            <input type="text" placeholder="search">
+            <form id="searchForm" action="{% url 'search_campaigns' %}" method="GET">
+                <input type="text" name="q" placeholder="Search" id="search">
+                {% comment %} <button type="submit"id='startfund'>Search</button> {% endcomment %}
+            </form>
+            <br>
            <button id="startfund">start a fund</button>
          
         </div>
@@ -30,9 +34,7 @@
 
 
 </div>
-<div id="footer">
 
-</div>
 
 {% endblock content %}
 {% block script %}
