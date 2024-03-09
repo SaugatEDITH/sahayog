@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-
 urlpatterns = [
     path('', views.index,name='home'),
     path('campaign/', views.campaign,name='causes'),
@@ -27,7 +26,6 @@ urlpatterns = [
     path("campaign/<str:slug>/esewasahayog/", views.esewasahayog, name="esewasahayog"),
     # for esewa success url
     path("<str:slug>/esewa-payment-success/<int:res>", views.payment_is_successful, name="payment_is_successful_esewa")
-
-
+    #email password reser
     # path('<str:hawa>/',views.hawa,name='404'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

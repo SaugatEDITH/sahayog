@@ -5,6 +5,9 @@
 {% block content %}
 <div id="main">
     <div id="contact-div">
+            {% if message_sent %}
+            <div style="color: green;">Message sent successfully!</div>
+            {% endif %}
         <div>
             <h1>contact us</h1>
             <div>
@@ -46,17 +49,18 @@
 
             </div>
 
-            <form action="">
+            <form action="{% url 'contact' %}" method="post">
+                {% csrf_token %}
                 <label for="">
                     <span class="span-name">Name</span>
-                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" name="name" id='name' placeholder="Name" required>
                 </label>
                 <label for="">
                     <span class="span-email">Email</span>
-                    <input type="text" name="email" placeholder="Email">
+                    <input type="text" name="email" id="email" placeholder="Email" required>
                 </label>
                 <label for="">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Tell us your project" style="height: 181px;"></textarea>
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Tell us your project" style="height: 181px;" required></textarea>
                 </label>
                 <input type="submit">
             </form>

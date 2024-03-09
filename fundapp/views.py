@@ -14,6 +14,7 @@ from django.core.files.storage import default_storage
 from django.contrib import messages
 # Models import
 from .models import AllFund, EsewaClaim, KhaltiClaim, BankClaim, Transaction
+from . models import Usermessage
 # Payment Gateway API imports
 # esewa
 import uuid
@@ -114,11 +115,30 @@ def handleLogout(request):
     messages.success(
         request, "You are Logged Out!")
     return redirect("/")  # redirect on home
-
+#for contact page
 def contact(request):
-    return render(request, 'contact.html')
+    message_sent = False  # Flag to indicate if the message has been sent
+    
+    if request.method == 'POST':
+        # If the form is submitted
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
 
+        # Check if the user has already submitted a message
+        existing_message = Usermessage.objects.filter(email=email).first()
+        if existing_message:
+            # If a message already exists, update it
+            existing_message.name = name
+            existing_message.message = message
+            existing_message.save()
+        else:
+            # If no message exists, create a new one
+            Usermessage.objects.create(name=name, email=email, message=message)
+        
+        message_sent = True  # Set the flag to indicate message sent successfully
 
+    return render(request, 'contact.html', {'message_sent': message_sent})
 @login_required(login_url='/login/')
 def startfund(request):
     if request.method == 'POST':

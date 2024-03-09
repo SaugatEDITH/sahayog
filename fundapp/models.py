@@ -33,8 +33,7 @@ class AllFund(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f'{self.slug} --by {self.user}'
-    
+        return f'{self.slug} --by {self.user}'  
     
 class EsewaClaim(models.Model):
     sno = models.AutoField(primary_key=True)
@@ -81,4 +80,10 @@ class Transaction(models.Model):
     
     def __str__(self):
         return f'Transaction of -- {self.user}'
-    
+class Usermessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name      
