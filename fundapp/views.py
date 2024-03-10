@@ -116,29 +116,20 @@ def handleLogout(request):
         request, "You are Logged Out!")
     return redirect("/")  # redirect on home
 #for contact page
-def contact(request):
-    message_sent = False  # Flag to indicate if the message has been sent
-    
+def contact(request):    
     if request.method == 'POST':
-        # If the form is submitted
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-
-        # Check if the user has already submitted a message
-        existing_message = Usermessage.objects.filter(email=email).first()
-        if existing_message:
-            # If a message already exists, update it
-            existing_message.name = name
-            existing_message.message = message
-            existing_message.save()
-        else:
-            # If no message exists, create a new one
-            Usermessage.objects.create(name=name, email=email, message=message)
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        contact = Usermessage(name=name,email=email,message=message)
+        contact.save()
+        messages.success(request, 'Your message has been successfully sent!')
+    else:
+        HttpResponseNotFound("Dont try to be cool")
+    return render(request, 'contact.html')
         
-        message_sent = True  # Set the flag to indicate message sent successfully
-
-    return render(request, 'contact.html', {'message_sent': message_sent})
+        
+        
 @login_required(login_url='/login/')
 def startfund(request):
     if request.method == 'POST':
