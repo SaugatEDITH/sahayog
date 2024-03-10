@@ -33,8 +33,7 @@ class AllFund(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f'{self.slug} --by {self.user}'
-    
+        return f'{self.slug} --by {self.user}'  
     
 class EsewaClaim(models.Model):
     sno = models.AutoField(primary_key=True)
