@@ -190,9 +190,8 @@ def fundclaiming(request,post_id):
         if form_type == 'esewa':
             esewa_number = request.POST.get('esewanumber')
             esewa_address = request.POST.get('esewaaddress')
-            # receivedAmount=request.POST.get('receivedAmount')
-            # esewaToSave = EsewaClaim(user = request.user ,phoneNumber = esewa_number, receivingAddress = esewa_address,receivedAmount= receivedAmount)
-
+            receivedAmount=request.POST.get('receivedAmount')
+            esewaToSave = EsewaClaim(user = request.user ,phoneNumber = esewa_number, receivingAddress = esewa_address,receivedAmount= receivedAmount)
             esewaToSave.save()
             # To delete the campaign after saving details
             campaign.delete()

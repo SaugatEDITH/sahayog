@@ -40,7 +40,7 @@ class EsewaClaim(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='esewa_claim_user')
     phoneNumber = models.CharField(max_length=15)
     receivingAddress = models.CharField(max_length = 200)
-    receivedAmount=models.IntegerField(default=0)
+    receivedAmount = models.DecimalField(max_digits=19, decimal_places=10, default=0.00)
     
     
     def __str__(self):
