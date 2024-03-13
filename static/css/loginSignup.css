@@ -24,7 +24,7 @@ form a.forgot {
 
 
 
-form label input {
+form label input ,.amount {
     padding: 10px 15px;
     border-radius: 10px;
     outline: none;

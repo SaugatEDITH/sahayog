@@ -5,10 +5,9 @@
 {% block content %}
 <div id="main">
     <div id="contact-div">
-        {% if message_sent %}
-        <div style="color: green;">Message sent successfully!</div>
-        {% endif %}
+       
         <div>
+           
             <h1>contact us</h1>
             <div>
                 <a href="">
@@ -35,12 +34,12 @@
             <h3>contact us in future</h3>
             <div>
                 <div>
-                    <i class="ri-map-pin-line"></i>
+                    <a href='https://www.google.com/maps/place/Hetauda+City+College/@27.4176764,85.0460684,222m/data=!3m1!1e3!4m19!1m12!4m11!1m3!2m2!1d85.0481464!2d27.4171181!1m6!1m2!1s0x39eb4991cc5cd01d:0x871e7e627e6b38b!2zQzI4WCtSN1IsIOCkquCkvuCksOCkv-CknOCkvuCkpCDgpK7gpL7gpLDgpY3gpJcsIEhldGF1ZGEgNDQxMDc!2m2!1d85.0481496!2d27.4171204!3m5!1s0x39eb4991cc5cd01d:0x871e7e627e6b38b!8m2!3d27.4171239!4d85.0481376!16s%2Fg%2F11bw2jk8z5?entry=ttu'><i class="ri-map-pin-line"></i></a>
                     Hetauda
                 </div>
                 <div>
                     <i class="ri-phone-line"></i>
-                    98989889898
+                    9876543210
                 </div>
                 <div>
                     <i class="ri-mail-line"></i>
@@ -48,7 +47,11 @@
                 </div>
 
             </div>
-
+            <center> 
+                {% if message_sent %}
+                <div style="color: green;">Message sent successfully!</div>
+                {% endif %}
+            </center>
             <form action="{% url 'contact' %}" method="post">
                 {% csrf_token %}
                 <label for="">
@@ -60,23 +63,23 @@
                     <input type="text" name="email" id="email" placeholder="Email" required>
                 </label>
                 <label for="">
-                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Tell us your project" style="height: 181px;" required></textarea>
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Tell us your project" style="height: 139px; width: 910px;;" required></textarea>
                 </label>
                 <input type="submit">
             </form>
             <div class="socialmedia">
-                <a href="">
+                <a href="https://www.instagram.com/">
                     <i class="ri-instagram-line"></i>
                 </a>
-                <a href="">
+                <a href="https://www.facebook.com">
 
                     <i class="ri-facebook-line"></i>
                 </a>
-                <a href="">
+                <a href="https://github.com/">
                     <i class="ri-github-fill"></i>
 
                 </a>
-                <a href="">
+                <a href="https://www.whatsapp.com/">
                     <i class="ri-whatsapp-line"></i>
 
                 </a>
@@ -88,8 +91,8 @@
 </div>
 
 {% endblock content %}
-   {% block script %}.
-   document.addEventListener("DOMContentLoaded", function() {
+{% block script %}
+document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
 
     form.addEventListener("submit", function(event) {
@@ -126,24 +129,23 @@
 
     function setError(inputField, errorMessage) {
         inputField.style.borderColor = "red";
-        let errorSpan = inputField.nextElementSibling;
-        if (!errorSpan || errorSpan.className !== "error-message") {
-            errorSpan = document.createElement("span");
-            errorSpan.className = "error-message";
-            errorSpan.style.fontSize = "0.8em";
-            inputField.parentNode.insertBefore(errorSpan, inputField.nextSibling);
+        
+        let errorDiv = inputField.nextElementSibling;
+        if (!errorDiv || errorDiv.className !== "error-message") {
+            errorDiv = document.createElement("div");
+            errorDiv.className = "error-message";
+            errorDiv.style.color = "red";
+            errorDiv.innerHTML = "<strong>**</strong> " + errorMessage;
+            inputField.parentNode.insertBefore(errorDiv, inputField.nextSibling);
         }
-        errorSpan.innerHTML = "<strong>**</strong> " + errorMessage;
-        errorSpan.style.color = "red";
     }
 
     function clearError(inputField) {
         inputField.style.borderColor = "";
-        let errorSpan = inputField.nextElementSibling;
-        if (errorSpan && errorSpan.className === "error-message") {
-            errorSpan.parentNode.removeChild(errorSpan);
+        let errorDiv = inputField.nextElementSibling;
+        if (errorDiv && errorDiv.className === "error-message") {
+            errorDiv.parentNode.removeChild(errorDiv);
         }
     }
 });
-
-   {% endblock script %}
+{% endblock script %}

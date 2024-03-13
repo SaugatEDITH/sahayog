@@ -84,7 +84,7 @@ def handleSignup(request):
         print(f"Hello {username}")
         return redirect('/')
     if request.user.is_authenticated:
-        return HttpResponse('$404- Don\'t try be cool!')
+        return HttpResponse(render(request, 'case_no_404.html'))
     else:
         return render(request, 'signup.html')
 
@@ -106,7 +106,7 @@ def handleLogin(request):
                 request, "Invalid credentials, Please try again!")
             return redirect("/login/")  # redirect on home
     if request.user.is_authenticated:
-        return HttpResponse('$404- Don\'t try be cool!')
+        return HttpResponse('case_no_404.html')
     else:
         return render(request, 'login.html')
 
@@ -116,20 +116,46 @@ def handleLogout(request):
         request, "You are Logged Out!")
     return redirect("/")  # redirect on home
 #for contact page
-def contact(request):    
+def contact(request):
+    message_sent=False 
     if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        message = request.POST['message']
-        contact = Usermessage(name=name,email=email,message=message)
-        contact.save()
-        messages.success(request, 'Your message has been successfully sent!')
-    else:
-        HttpResponseNotFound("Dont try to be cool")
-    return render(request, 'contact.html')
+        # If the form is submitted
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Check if the user has already submitted a message
+        existing_message = Usermessage.objects.filter(email=email).first()
+        if existing_message:
+            # If a message already exists, update it
+            existing_message.name = name
+            existing_message.message = message
+            existing_message.save()
+        else:
+            # If no message exists, create a new one
+            Usermessage.objects.create(name=name, email=email, message=message)
+        
+        message_sent = True  # Set the flag to indicate message sent successfully
+
+    return render(request, 'contact.html', {'message_sent': message_sent})
         
         
-        
+       
+    # if request.method == 'POST':
+    #     name = request.POST['name']
+    #     email = request.POST['email']
+    #     message = request.POST['message']
+    #     contact = Usermessage(name=name,email=email,message=message)
+    #     contact.save()
+    #     message_sent=True
+    #     messages.success(request, 'Your message has been successfully sent!',{'message_sent': message_sent})
+    # else:
+    #     HttpResponseNotFound(render(request, 'case_no_404.html'))
+    # return render(request, 'contact.html')    
+    #flag type.
+    #  message_sent = False  # Flag to indicate if the message has been sent
+    
+    
 @login_required(login_url='/login/')
 def startfund(request):
     if request.method == 'POST':
@@ -305,5 +331,5 @@ def updateCampaign(request, post_id):
     context = {'campaign': campaign}
     return render(request, 'editCampaign.html', context)
     
-# def hawa(request,hawa):
-#     return render(request, 'case_no_404.html')
+def hawa(request,hawa):
+    return render(request, 'case_no_404.html')

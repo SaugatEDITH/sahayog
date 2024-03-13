@@ -1,10 +1,26 @@
 {% extends "base.html" %}
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/css/campaigndetails.css">
+{% comment %} <link rel="stylesheet" href="/static/css/eswa.css"> {% endcomment %}
+<style>
+    .buttonconfirm{
+    margin-top: 30px;
+    padding: 20px 20px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    width: 50%;
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: #D4E7C5;
+    color: #222;
+    border: 1px solid hsla(0, 0%, 60%, 0.185);
+    }
+</style>
 {% endblock stylesheet %}
 {% block content %}
 <!-- ham -->
 <div id="main">
+    <center>
     <h2>Are you Sure Want to Donate?</h2>
     <form id="esewa-form" method="POST" action="https://rc-epay.esewa.com.np/api/epay/main/v2/form">
         <input type="hidden" id="amount" name="amount" value="{{res}}" required>
@@ -22,6 +38,7 @@
         <input type="hidden" id="signature" name="signature" value="{{signature}}" required>
         <input value="Submit" type="submit" class="buttonconfirm">
     </form>
+    <center>
 </div>
 
 {% endblock content %}
