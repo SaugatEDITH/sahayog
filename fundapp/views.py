@@ -5,11 +5,14 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from decimal import Decimal
+from django.conf import settings
 # for login systems and user related systems
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import default_storage
+#for paypal form
+from paypal.standard.forms import PayPalPaymentsForm
 # for message display
 from django.contrib import messages
 # Models import
@@ -331,6 +334,35 @@ def updateCampaign(request, post_id):
         return redirect('/')
     context = {'campaign': campaign}
     return render(request, 'editCampaign.html', context)
-    
-def hawa(request,hawa):
-    return render(request, 'case_no_404.html')
+#paypal
+
+def Paypalsahayog(request):
+    print(request)
+    host=request.get_host()
+    print(host)
+    paypal_dict={
+        'business':settings.PAYPAL_RECEIVER_EMALI,
+        'amount':'20.00',
+        'currency_code':'USD',
+        'item_name':'product10',
+        'invoice':str(uuid.uuid4()),
+        'notify_url':f'http://{host}{reverse("paypal-ipn")}',
+        'return_url':f'http://{host}{reverse("paypal-return")}',#payment success
+        'cancel_return':f'http://{host}{reverse("paypal-cancel")}',
+
+    }
+    print(paypal_dict)
+    form=PayPalPaymentsForm(initial=paypal_dict)
+    context={'form':form}
+    return render(request,'forpaypal.html',context)
+
+def paypal_return(request):
+    #this get the id when completed
+    messages.success(request,'payment successful')
+    return redirect('home')
+
+def paypal_cancel(request):
+    messages.error(request,'payment cancaled')
+    return redirect('home')    
+# def hawa(request,hawa):
+#     return render(request, 'case_no_404.html')
