@@ -366,30 +366,46 @@ def paypalone(request, slug):
         'item_name':'product10',
         'invoice':str(uuid.uuid4()),
         'notify_url':f'http://{host}{reverse("paypal-ipn")}',
-        'return_url':f'http://{host}/{reverse("paypal-return")}',#payment success
+        'return_url': f'http://{host}/{reverse("paypal-return", kwargs={"slug": slug, "amount": amount})}',  #payment success
         'cancel_return':f'http://{host}{reverse("paypal-cancel")}',
         }
         form=PayPalPaymentsForm(initial=paypal_dict)
         context = {
             'amount':amount,
+            'slug':slug,
             'form':form
             }
         return render(request,'forpaypal.html', context)
     else:
-        slugg = slug
-        uppercontext  = {'slugg':slugg}
+        uppercontext = {'slug': slug}
         return render(request,'paypalone.html',uppercontext)
 
 
 # success url of paypal
-def paypal_return(request):
-    #this get the id when completed
+def paypal_return(request,slug, amount):
+    allfund = AllFund.objects.filter(slug=slug).first()    
+    if request.method == 'GET':
+        try:
+            transaction = Transaction(
+                user=request.user,
+                medium='Paypal', 
+                amount = amount,
+                amountReceiver=allfund.user,
+                campaignTitle=allfund,
+            )
+            transaction.save()
+            res = int(amount)
+            allfund.have += res
+            allfund.save()
+        except:
+            return HttpResponseNotFound("Error! Payment Roll-Backed")
+            
     messages.success(request,'Payment Successful')
-    return redirect('home')
+    return redirect("/")
 
 # roll back url
 def paypal_cancel(request, slug):
-    messages.error(request,'payment cancaled')
+    messages.error(request,'Payment Cancelled')
     return redirect('home')    
 
 # def hawa(request,hawa):
