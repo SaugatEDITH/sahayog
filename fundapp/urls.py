@@ -26,10 +26,12 @@ urlpatterns = [
     path("campaign/<str:slug>/esewasahayog/", views.esewasahayog, name="esewasahayog"),
     # for esewa success url
     path("<str:slug>/esewa-payment-success/<int:res>", views.payment_is_successful, name="payment_is_successful_esewa"),
+
     #FOR paypal........
-    path('paypalsahayog/', views.Paypalsahayog,name='paypalsahayog'),
+    path('campaign/<str:slug>/paypalone/paypalsahayog', views.Paypalsahayog, name='Paypalsahayog'),
+    path('campaign/<str:slug>/paypalone/', views.paypalone,name='paypalone'),
     #for paypal sucess url
-    path('paypal-return', views.paypal_return,name='paypal-return'),
+    path('paypal-return/', views.paypal_return,name='paypal-return'),
     #paypal payment cancaled url
     path('paypal-cancel', views.paypal_cancel,name='paypal-cancel'),
     #Hawa

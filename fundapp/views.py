@@ -336,10 +336,8 @@ def updateCampaign(request, post_id):
     return render(request, 'editCampaign.html', context)
 #paypal
 
-def Paypalsahayog(request):
-    print(request)
+def Paypalsahayog(request, slug):
     host=request.get_host()
-    print(host)
     paypal_dict={
         'business':settings.PAYPAL_RECEIVER_EMALI,
         'amount':'20.00',
@@ -351,18 +349,48 @@ def Paypalsahayog(request):
         'cancel_return':f'http://{host}{reverse("paypal-cancel")}',
 
     }
-    print(paypal_dict)
     form=PayPalPaymentsForm(initial=paypal_dict)
     context={'form':form}
     return render(request,'forpaypal.html',context)
 
+def paypalone(request, slug):
+    if request.method == 'POST':
+        amount = request.POST.get('amount')
+        # slugg  = request.POST.get('slug')
+        host=request.get_host()
+        paypal_dict={
+        'business':settings.PAYPAL_RECEIVER_EMALI,
+        'amount':amount,
+        'currency_code':'USD',
+        # 'item_name':slugg,
+        'item_name':'product10',
+        'invoice':str(uuid.uuid4()),
+        'notify_url':f'http://{host}{reverse("paypal-ipn")}',
+        'return_url':f'http://{host}/{reverse("paypal-return")}',#payment success
+        'cancel_return':f'http://{host}{reverse("paypal-cancel")}',
+        }
+        form=PayPalPaymentsForm(initial=paypal_dict)
+        context = {
+            'amount':amount,
+            'form':form
+            }
+        return render(request,'forpaypal.html', context)
+    else:
+        slugg = slug
+        uppercontext  = {'slugg':slugg}
+        return render(request,'paypalone.html',uppercontext)
+
+
+# success url of paypal
 def paypal_return(request):
     #this get the id when completed
-    messages.success(request,'payment successful')
+    messages.success(request,'Payment Successful')
     return redirect('home')
 
-def paypal_cancel(request):
+# roll back url
+def paypal_cancel(request, slug):
     messages.error(request,'payment cancaled')
     return redirect('home')    
+
 # def hawa(request,hawa):
 #     return render(request, 'case_no_404.html')

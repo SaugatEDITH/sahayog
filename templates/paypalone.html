@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+{% comment %} <link rel="stylesheet" href="/static/css/esewa.css"> {% endcomment %}
+<style>
+    .submit{
+        padding: 10px;
+        border: none;
+        border: 1px solid #999;
+        width: fit-content;
+        width: 40%;
+        border-radius: 10px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        font-size: 20px;
+        cursor: pointer;
+        background: #99BC85;
+        color: #fff;
+        transition: .3s linear;
+    }
+    input {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        padding: 20px 20px;
+        border-radius: 20px;
+        outline: none;
+        border: none;
+        width: 50%;
+        letter-spacing: 2px;
+        font-size: 20px;
+        background: #D4E7C5;
+        color: #222;
+        border: 1px solid hsla(0, 0%, 60%, 0.185);
+    }
+</style>
+{% endblock stylesheet %}
+{% block content %}
+<!-- ham -->
+<div id="main">
+   <center> <h2>Enter a amount you want to donate Using Paypal</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="amount" placeholder="Amount" class='amount'>
+        <input type="hidden" name="slug" value={{slugg}}>
+        <input type="submit" value="Continue" class='submit'>
+    </form>
+</center>
+</div>
+
+{% endblock content %}
