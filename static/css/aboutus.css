@@ -1,3 +1,6 @@
+:root{
+    --dev-card-background:#D4E7C5;
+}
 #aboutus-div {
     display: flex;
     flex-direction: column;
@@ -33,7 +36,7 @@
 }
 
 #aboutus-div div:nth-child(4) .img-div {
-    background: #D4E7C5;
+    background: var(--dev-card-backgroundbackground);
     height: 40rem;
     display: flex;
     width: 18rem;

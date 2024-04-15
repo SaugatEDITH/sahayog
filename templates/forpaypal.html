@@ -9,14 +9,32 @@
     <link rel="stylesheet" href="">
 </head>
 <style>
-    * {
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body {
         font-family: sans-serif;
+        background-image: url('/static/images/charity.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .center{
+        height:100vh;
+        width: 100vw;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        flex-direction: column; 
+        gap: 30px;
     }
 </style>
 
 <body>
 
-    <center>
+
+   <div class="center"> 
+    
 
         {% if messages %}
         <ul>
@@ -27,8 +45,9 @@
         {% endif %}
         <h3>The amount is: ${{amount}}</h3>
         <h3>For: {{slug}}</h3>
-        {{ form.render }}
-    </center>
+   
+    {{ form.render }}
+</div>
     <script src="" async defer></script>
 </body>
 

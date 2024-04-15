@@ -1,7 +1,13 @@
+:root{
+    --contact-page-Background:#D4E7C5;
+    --contact-Div-Background:hsl(94, 41%, 80%);
+    --contact-form-Background:#D4E7C5;
+    --submit-button-Background:#99BC85;
+}
 #contact-div {
     display: flex;
     height: 80vh;
-    background: #D4E7C5;
+    background: var(--contact-page-Background);
     border-radius: 10px;
 }
 
@@ -48,7 +54,7 @@
 #contact-div>div:nth-child(2) {
 
     width: 80%;
-    background-color: hsl(94, 41%, 80%);
+    background-color: var(--contact-Div-Background);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,7 +95,7 @@
 
 #contact-div form {
     display: flex;
-    background: #D4E7C5;
+    background: var(--contact-form-background);
     position: relative;
     width: 100%;
     flex-direction: column;
@@ -161,7 +167,7 @@
     font-size: 18px;
     letter-spacing: 1px;
     cursor: pointer;
-    background: #99BC85;
+    background: var(--submit-button-Background);
     color: white;
     transition: .3s linear;
     border: 1px solid #999;
@@ -175,7 +181,7 @@
     font-size: 18px;
     letter-spacing: 1px;
     cursor: pointer;
-    background: #99BC85;
+    background: var(--submit-button-Background);
     color: white;
     transition: .3s linear;
     border: 1px solid #999;

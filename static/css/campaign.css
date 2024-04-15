@@ -1,4 +1,7 @@
 /* campaign */
+:root{
+    --card-background-color:#BFD8AF;
+}
 #campaign {
     position: relative;
     width: 100%;
@@ -16,7 +19,6 @@
     justify-content: flex-start;
     gap: .5vw;
     padding: 2vw 7vw;
-    /* background: #D4E7C5; */
     overflow: auto;
 }
 
@@ -25,7 +27,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    background: #BFD8AF;
+    background:var(--card-background-color);
     height: 12vw;
     align-items: center;
     border-radius: 20px;
