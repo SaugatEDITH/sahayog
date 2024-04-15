@@ -232,6 +232,7 @@ def esewasahayog(request, slug):
     allfund = AllFund.objects.filter(slug=slug).first()
     if request.method == "POST":
         amtt = request.POST["amount"]
+        donatorName = request.POST['donatorname']
         res = Decimal(amtt) # converting the amount into decimal value
             
         def genSha256(key, message):
@@ -254,7 +255,8 @@ def esewasahayog(request, slug):
             'total_amount': total_amount,
             "allfund": allfund,
             'uid': uid,
-            'signature': result
+            'signature': result,
+            'donatorname': donatorName
         }
         return render(request, "foresewa.html", context)
     
@@ -262,7 +264,7 @@ def esewasahayog(request, slug):
     return render(request, "esewasahayog.html", outercontext)
 
 
-def payment_is_successful(request, slug, res):
+def payment_is_successful(request, slug, res, donator):
     # note: res is the total amount passed from 'esewasahayog.html' page
     allfund = AllFund.objects.filter(slug=slug).first()
     if request.method == "GET":
@@ -273,7 +275,8 @@ def payment_is_successful(request, slug, res):
             if(map_data.get('status') == 'COMPLETE'):
                 
                 transaction = Transaction(
-                    user=request.user,
+                    # user=request.user,
+                    donator = donator,
                     medium='Esewa', 
                     amount=res,
                     amountReceiver=allfund.user,
@@ -387,7 +390,7 @@ def paypal_return(request,slug, amount):
     if request.method == 'GET':
         try:
             transaction = Transaction(
-                user=request.user,
+                user= "Saugat",
                 medium='Paypal', 
                 amount = amount,
                 amountReceiver=allfund.user,

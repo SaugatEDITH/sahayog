@@ -40,6 +40,7 @@
    <center> <h2>Enter a amount you want to donate Using Paypal</h2>
     <form action="" method="post">
         {% csrf_token %}
+        <input type="text" name="donatorname" placeholder="Your Name" class='amount'>
         <input type="text" name="amount" placeholder="Amount" class='amount'>
         <input type="hidden" name="slug" value={{slugg}}>
         <input type="submit" value="Continue" class='submit'>

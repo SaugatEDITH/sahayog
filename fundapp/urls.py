@@ -25,7 +25,7 @@ urlpatterns = [
     # for esewa donation
     path("campaign/<str:slug>/esewasahayog/", views.esewasahayog, name="esewasahayog"),
     # for esewa success url
-    path("<str:slug>/esewa-payment-success/<int:res>", views.payment_is_successful, name="payment_is_successful_esewa"),
+    path("<str:slug>/esewa-payment-success/<int:res>/<str:donator>", views.payment_is_successful, name="payment_is_successful_esewa"),
 
     #FOR paypal........
     path('campaign/<str:slug>/paypalone/paypalsahayog', views.Paypalsahayog, name='Paypalsahayog'),

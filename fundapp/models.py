@@ -72,7 +72,8 @@ class BankClaim(models.Model):
     
 class Transaction(models.Model):
     sno = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_user_donator')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_user_donator')
+    donator  = models.CharField(max_length=100,default="Falano")
     medium = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=19, decimal_places=3)
     amountReceiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaction_user_receiver')
@@ -80,7 +81,7 @@ class Transaction(models.Model):
     # Address (sai confirmation)
     
     def __str__(self):
-        return f'Transaction of -- {self.user}'
+        return f'Transaction of -- {self.donator}'
     
 class Usermessage(models.Model):
     name = models.CharField(max_length=100)
