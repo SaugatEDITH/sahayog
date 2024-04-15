@@ -31,7 +31,7 @@ urlpatterns = [
     path('campaign/<str:slug>/paypalone/paypalsahayog', views.Paypalsahayog, name='Paypalsahayog'),
     path('campaign/<str:slug>/paypalone/', views.paypalone,name='paypalone'),
     #for paypal sucess url
-    path('paypal-return/<str:slug>/<str:amount>/', views.paypal_return,name='paypal-return'),
+    path('paypal-return/<str:slug>/<str:amount>/<str:doner>/', views.paypal_return,name='paypal-return'),
     #paypal payment cancaled url
     path('paypal-cancel', views.paypal_cancel,name='paypal-cancel'),
     #Hawa

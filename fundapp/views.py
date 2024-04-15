@@ -359,6 +359,7 @@ def Paypalsahayog(request, slug):
 def paypalone(request, slug):
     if request.method == 'POST':
         amount = request.POST.get('amount')
+        donerName = request.POST['donatorname']
         # slugg  = request.POST.get('slug')
         host=request.get_host()
         paypal_dict={
@@ -369,7 +370,7 @@ def paypalone(request, slug):
         'item_name':'product10',
         'invoice':str(uuid.uuid4()),
         'notify_url':f'http://{host}{reverse("paypal-ipn")}',
-        'return_url': f'http://{host}/{reverse("paypal-return", kwargs={"slug": slug, "amount": amount})}',  #payment success
+        'return_url': f'http://{host}/{reverse("paypal-return", kwargs={"slug": slug, "amount": amount, "doner": donerName})}',  #payment success
         'cancel_return':f'http://{host}{reverse("paypal-cancel")}',
         }
         form=PayPalPaymentsForm(initial=paypal_dict)
@@ -385,12 +386,13 @@ def paypalone(request, slug):
 
 
 # success url of paypal
-def paypal_return(request,slug, amount):
+def paypal_return(request,slug, amount,doner):
+    print(f"Donerrrrrrrr====={doner}")
     allfund = AllFund.objects.filter(slug=slug).first()    
     if request.method == 'GET':
         try:
             transaction = Transaction(
-                user= "Saugat",
+                donator = doner,
                 medium='Paypal', 
                 amount = amount,
                 amountReceiver=allfund.user,
