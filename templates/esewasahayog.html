@@ -38,13 +38,71 @@
 <!-- ham -->
 <div id="main">
    <center> <h2>Enter a amount you want to donate</h2>
-    <form action="" method="post">
+    <form action="" method="post" id="donationForm">
         {% csrf_token %}
-        <input type="text" name="donatorname" placeholder="Your Name" class='amount'>
-        <input type="text" name="amount" placeholder="Amount" class='amount'>
+        <input type="text" name="donatorname" placeholder="Your Name" class='amount' id="name">
+        <input type="text" name="amount" placeholder="Amount" class='amount' id="amount">
         <input type="submit" value="Continue" class='submit'>
     </form>
 </center>
 </div>
 
 {% endblock content %}
+{% block script %}
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("donationForm");
+
+    form.addEventListener("submit", function(event) {
+        const nameInput = document.getElementById("name");
+        const amountInput = document.getElementById("amount");
+
+        // Regular expression patterns for name and amount validation
+        const namePattern = /^[a-zA-Z\s]+$/;
+        const amountPattern = /^\d+$/;
+
+        let isValid = true;
+
+        // Validate donator name
+        if (!namePattern.test(nameInput.value.trim())) {
+            isValid = false;
+            setError(nameInput, "Name can only contain letters and spaces.");
+        } else {
+            clearError(nameInput);
+        }
+
+        // Validate amount
+        if (!amountPattern.test(amountInput.value.trim())) {
+            isValid = false;
+            setError(amountInput, "Amount must contain only numbers.");
+        } else {
+            clearError(amountInput);
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+    function setError(inputField, errorMessage) {
+        inputField.style.borderColor = "red";
+        let errorSpan = document.getElementById(inputField.id + "-error");
+        if (!errorSpan) {
+            errorSpan = document.createElement("span");
+            errorSpan.id = inputField.id + "-error";
+            errorSpan.style.color = "red";
+            inputField.parentNode.insertBefore(errorSpan, inputField.nextSibling);
+        }
+        errorSpan.textContent = "** " + errorMessage;
+    }
+
+    function clearError(inputField) {
+        inputField.style.borderColor = "";
+        let errorSpan = document.getElementById(inputField.id + "-error");
+        if (errorSpan) {
+            errorSpan.parentNode.removeChild(errorSpan);
+        }
+    }
+});
+
+{% endblock script %}
