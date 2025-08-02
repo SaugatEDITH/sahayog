@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -137,4 +138,4 @@ MEDIA_URL = '/media/'
 
 #paypal
 PAYPAL_TEST = True
-PAYPAL_RECEIVER_EMALI='sb-jkhmq29131294@business.example.com'
+PAYPAL_RECEIVER_EMALI=os.getenv("RECEIVER_EMAIL")
